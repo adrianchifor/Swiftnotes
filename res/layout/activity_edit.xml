@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:id="@+id/relativeLayoutEdit"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    tools:context="com.moonpi.swiftnotes.EditActivity"
+    android:background="@color/white" >
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/titleEdit"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:textStyle="bold"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:maxLines="1"
+        android:maxLength="50"
+        android:hint="@string/note_title"
+        android:gravity="center"
+        android:background="@color/black_10"
+        android:textSize="25sp"
+        android:inputType="textCapSentences"
+        android:textColorHint="@color/black_70" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="textCapSentences|textImeMultiLine|textMultiLine"
+        android:ems="10"
+        android:id="@+id/bodyEdit"
+        android:layout_below="@+id/titleEdit"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="top|left"
+        android:layout_marginTop="15dp"
+        android:maxLines="500"
+        android:textSize="18sp"
+        android:hint="@string/note_body"
+        android:background="@color/transparent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColorHint="@color/black_70" />
+
+</RelativeLayout>

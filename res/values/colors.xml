@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="swiftnotestheme_color">#CE0A31</color>
+    <color name="background_white">#FFE6E6E6</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="black_95">#F2000000</color>
+    <color name="black_90">#E6000000</color>
+    <color name="black_85">#D9000000</color>
+    <color name="black_80">#CC000000</color>
+    <color name="black_75">#B000000F</color>
+    <color name="black_70">#B3000000</color>
+    <color name="black_65">#A6000000</color>
+    <color name="black_60">#99000000</color>
+    <color name="black_55">#8C000000</color>
+    <color name="black_50">#80000000</color>
+    <color name="black_45">#73000000</color>
+    <color name="black_40">#66000000</color>
+    <color name="black_35">#59000000</color>
+    <color name="black_30">#4D000000</color>
+    <color name="black_25">#40000000</color>
+    <color name="black_20">#33000000</color>
+    <color name="black_15">#26000000</color>
+    <color name="black_10">#1A000000</color>
+    <!-- -->
+    <color name="white">#FFFFFF</color>
+    <color name="blue">#44A1EB</color>
+    <color name="teal">#77DDBB</color>
+    <color name="green">#BBE535</color>
+    <color name="yellow">#EEEE22</color>
+    <color name="orange">#FF8800</color>
+    <color name="red">#F56545</color>
+    <color name="pink">#FF3D7F</color>
+    <color name="purple">#BE80FF</color>
+
+</resources>

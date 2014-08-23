@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <style name="Theme.SwiftnotesActionBar" parent="@style/SwiftnotesTheme">
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_swiftnotesactionbar</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.SwiftnotesActionBar</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.SwiftnotesActionBar</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.SwiftnotesActionBar</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.SwiftnotesActionBar</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.SwiftnotesActionBar</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_swiftnotesactionbar</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_swiftnotesactionbar</item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.SwiftnotesActionBar</item>
+        <item name="android:actionOverflowButtonStyle">@style/ActionBarOverflow</item>
+    </style>
+
+    <style name="ActionBar.Solid.SwiftnotesActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@drawable/ab_solid_swiftnotesactionbar</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_swiftnotesactionbar</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_swiftnotesactionbar</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.SwiftnotesActionBar</item>
+        <item name="android:titleTextStyle">@style/ActionBarTitleText</item>
+    </style>
+
+    <style name="ActionBar.Transparent.SwiftnotesActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@drawable/ab_transparent_swiftnotesactionbar</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.SwiftnotesActionBar</item>
+        <item name="android:titleTextStyle">@style/ActionBarTitleText</item>
+    </style>
+
+    <style name="ActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title" >
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="ActionBarOverflow" parent="@android:style/Widget.Holo.ActionButton.Overflow" >
+        <item name="android:src">@drawable/ic_action_core_overflow</item>
+    </style>
+
+    <style name="PopupMenu.SwiftnotesActionBar" parent="@android:style/Widget.Holo.Light.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_swiftnotesactionbar</item>	
+    </style>
+
+    <style name="DropDownListView.SwiftnotesActionBar" parent="@android:style/Widget.Holo.Light.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_swiftnotesactionbar</item>
+    </style>
+
+    <style name="ActionBarTabStyle.SwiftnotesActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_swiftnotesactionbar</item>
+    </style>
+
+    <style name="DropDownNav.SwiftnotesActionBar" parent="@android:style/Widget.Holo.Light.Spinner">
+        <item name="android:background">@drawable/spinner_background_ab_swiftnotesactionbar</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_swiftnotesactionbar</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_swiftnotesactionbar</item>
+    </style>
+    
+    <style name="ProgressBar.SwiftnotesActionBar" parent="@android:style/Widget.Holo.Light.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_swiftnotesactionbar</item>
+    </style>
+    
+    <style name="ActionButton.CloseMode.SwiftnotesActionBar" parent="@android:style/Widget.Holo.Light.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_swiftnotesactionbar</item>
+    </style>
+
+    <style name="Theme.SwiftnotesActionBar.Widget" parent="@android:style/Theme.Holo">
+        <item name="android:popupMenuStyle">@style/PopupMenu.SwiftnotesActionBar</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.SwiftnotesActionBar</item>
+    </style>
+
+</resources>

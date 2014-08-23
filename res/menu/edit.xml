@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.moonpi.swiftnotes.EditActivity" >
+
+    <item android:id="@+id/action_note_colour"
+        android:title="@string/action_note_colour"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_note_colour"
+        android:showAsAction="always" />
+
+    <item android:id="@+id/action_save"
+        android:title="@string/action_save"
+        android:orderInCategory="101"
+        android:icon="@drawable/ic_save"
+        android:showAsAction="always" />
+
+    <item android:id="@+id/action_font_size"
+        android:title="@string/action_font_size"
+        android:orderInCategory="102"
+        android:showAsAction="never" />
+
+    <item android:id="@+id/action_delete"
+        android:title="@string/action_delete"
+        android:orderInCategory="103"
+        android:showAsAction="never" />
+
+</menu>
