@@ -32,11 +32,12 @@
         android:id="@+id/bodyView"
         android:layout_below="@+id/titleView"
         android:layout_alignLeft="@+id/titleView"
+        android:layout_alignStart="@+id/titleView"
         android:layout_marginTop="5dp"
         android:paddingBottom="8dp"
-        android:layout_toLeftOf="@+id/favourite"
-        android:layout_marginRight="10dp"
-        android:maxLines="5" />
+        android:maxLines="5"
+        android:layout_alignRight="@+id/titleView"
+        android:layout_alignEnd="@+id/titleView" />
 
     <ImageButton
         android:layout_width="40dp"
@@ -48,7 +49,8 @@
         android:scaleType="fitXY"
         android:src="@drawable/ic_unfav"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginRight="10dp"
+        android:contentDescription="@string/favourite_content_description" />
 
     <View
         android:layout_width="wrap_content"

@@ -13,6 +13,9 @@
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_swiftnotesactionbar</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.SwiftnotesActionBar</item>
         <item name="android:actionOverflowButtonStyle">@style/ActionBarOverflow</item>
+
+        <!-- Light.DarkActionBar specific -->
+        <item name="android:actionBarWidgetTheme">@style/Theme.SwiftnotesActionBar.Widget</item>
     </style>
 
     <style name="ActionBar.Solid.SwiftnotesActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
@@ -39,7 +42,7 @@
     </style>
 
     <style name="PopupMenu.SwiftnotesActionBar" parent="@android:style/Widget.Holo.Light.ListPopupWindow">
-        <item name="android:popupBackground">@drawable/menu_dropdown_panel_swiftnotesactionbar</item>	
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_swiftnotesactionbar</item>
     </style>
 
     <style name="DropDownListView.SwiftnotesActionBar" parent="@android:style/Widget.Holo.Light.ListView.DropDown">
@@ -64,9 +67,15 @@
         <item name="android:background">@drawable/btn_cab_done_swiftnotesactionbar</item>
     </style>
 
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
     <style name="Theme.SwiftnotesActionBar.Widget" parent="@android:style/Theme.Holo">
         <item name="android:popupMenuStyle">@style/PopupMenu.SwiftnotesActionBar</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.SwiftnotesActionBar</item>
+        <item name="android:itemTextAppearance">@style/DropDownTextColor</item>
+    </style>
+
+    <style name="DropDownTextColor">
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>

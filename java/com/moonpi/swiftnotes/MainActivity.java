@@ -2,6 +2,7 @@ package com.moonpi.swiftnotes;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -74,6 +75,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     */
 
     private static final int NEW_NOTE_REQUEST = 15000; //requestCode for new note activity
+    private static final int DIALOG_BACKUP_CHECK = 1;
+    private static final int DIALOG_RESTORE_CHECK = 2;
+    private static final int DIALOG_BACKUP_OK = 3;
+    private static final int DIALOG_RESTORE_FAILED = 4;
+
+    private boolean backupSuccessful = false;
+    private boolean restoreSuccessful = false;
+    private String backupFilePath = "";
+
+    private int actionBarTitle = 0;
+    private Typeface lobsterTwo;
 
     private ListView listView;
     private TextView noNotes;
@@ -306,20 +318,31 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //get lobster_two asset and create typeface
+        //set action bar title to lobster_two typeface
+        lobsterTwo = Typeface.createFromAsset(getAssets(), "lobster_two.otf");
+
+        actionBarTitle = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
+
+        TextView actionBarTitleView = null;
+        if (actionBarTitle != 0)
+            actionBarTitleView = (TextView) getWindow().findViewById(actionBarTitle);
+
+        if (actionBarTitleView != null) {
+            if (lobsterTwo != null)
+                actionBarTitleView.setTypeface(lobsterTwo);
+        }
+
         readFromJSON();
         writeToJSON();
         readFromJSON();
 
-        //get lobster_two asset and create typeface
-        //set action bar title to lobster_two typeface
-        Typeface lobsterTwo = Typeface.createFromAsset(getAssets(), "lobster_two.otf");
+        File folder = new File(Environment.getExternalStorageDirectory() + "/Swiftnotes");
+        File backupFile = new File(folder, "swiftnotes_backup.json");
 
-        int actionBarTitle = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
-        TextView actionBarTitleView = (TextView) getWindow().findViewById(actionBarTitle);
+        if (backupFile.exists())
+            backupFilePath = backupFile.getAbsolutePath();
 
-        if (actionBarTitleView != null) {
-            actionBarTitleView.setTypeface(lobsterTwo);
-        }
 
         setContentView(R.layout.activity_main);
 
@@ -337,7 +360,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         newNote.setOnClickListener(this);
 
         //if no notes, show 'Press + to add new note' text, invisible otherwise
-        if(notes.length() == 0)
+        if (notes.length() == 0)
             noNotes.setVisibility(View.VISIBLE);
 
         else
@@ -345,13 +368,315 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
 
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        if (id == DIALOG_BACKUP_CHECK) {
+            return new AlertDialog.Builder(this)
+                    .setTitle(R.string.action_backup)
+                    .setMessage(R.string.dialog_check_backup_if_sure)
+                    .setPositiveButton(R.string.yes_button, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (isExternalStorageWritable()) {
+                                //check if Swiftntotes folder exists, if not, create directory
+                                File folder = new File(Environment.getExternalStorageDirectory() + "/Swiftnotes");
+                                boolean folderCreated = true;
+
+                                if (!folder.exists()) {
+                                    folderCreated = folder.mkdir();
+                                }
+
+                                //check if backup file exists, if yes, delete and create new, if not, just create new
+                                File backupFile = new File(folder, "swiftnotes_backup.json");
+                                boolean backupFileCreated = false;
+
+                                if (backupFile.exists()) {
+                                    boolean backupFileDeleted = backupFile.delete();
+
+                                    if (backupFileDeleted) {
+                                        try {
+                                            backupFileCreated = backupFile.createNewFile();
+                                            backupFilePath = backupFile.getAbsolutePath();
+
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+
+                                            backupFileCreated = false;
+                                        }
+                                    }
+                                }
+
+                                //if backup file doesn't exist, create new
+                                else {
+                                    try {
+                                        backupFileCreated = backupFile.createNewFile();
+                                        backupFilePath = backupFile.getAbsolutePath();
+
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+
+                                        backupFileCreated = false;
+                                    }
+                                }
+
+                                //check if notes.json exists
+                                File notesFile = new File(getFilesDir() + "/notes.json");
+                                boolean notesFileCreated = false;
+
+                                if (notesFile.exists())
+                                    notesFileCreated = true;
+
+                                //if everything exists, stream content from notes.json to backup file
+                                if (folderCreated && backupFileCreated && notesFileCreated) {
+                                    backupSuccessful = true;
+
+                                    InputStream is = null;
+                                    OutputStream os = null;
+
+                                    try {
+                                        is = new FileInputStream(notesFile);
+                                        os = new FileOutputStream(backupFile);
+
+                                    } catch (FileNotFoundException e) {
+                                        e.printStackTrace();
+                                        backupSuccessful = false;
+                                    }
+
+                                    if (is != null && os != null) {
+                                        byte[] buf = new byte[1024];
+                                        int len;
+
+                                        try {
+                                            while ((len = is.read(buf)) > 0) {
+                                                os.write(buf, 0, len);
+                                            }
+
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                            backupSuccessful = false;
+                                        }
+
+                                        try {
+                                            is.close();
+                                            os.close();
+
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                            backupSuccessful = false;
+                                        }
+                                    }
+
+
+                                    if (backupSuccessful) {
+                                        showBackupSuccessfulDialog();
+                                    }
+
+                                    else {
+                                        Toast toast = Toast.makeText(getApplicationContext(),
+                                                getResources().getString(R.string.toast_backup_failed),
+                                                Toast.LENGTH_SHORT);
+                                        toast.show();
+                                    }
+                                }
+
+                                //either folder or files weren't successfully created, toast failed
+                                else {
+                                    Toast toast = Toast.makeText(getApplicationContext(),
+                                            getResources().getString(R.string.toast_backup_failed),
+                                            Toast.LENGTH_SHORT);
+                                    toast.show();
+                                }
+                            }
+
+                            //if external storage not writable, toast failed
+                            else {
+                                Toast toast = Toast.makeText(getApplicationContext(),
+                                        getResources().getString(R.string.toast_backup_failed),
+                                        Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                        }
+                    })
+                    .setNegativeButton(R.string.no_button, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .create();
+        }
+
+
+        else if (id == DIALOG_BACKUP_OK) {
+            return new AlertDialog.Builder(this)
+                    .setTitle(R.string.dialog_backup_created_title)
+                    .setMessage(getResources().getString(R.string.dialog_backup_created) + " "
+                            + backupFilePath)
+                    .setCancelable(true)
+                    .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .create();
+        }
+
+
+        else if (id == DIALOG_RESTORE_CHECK) {
+            return new AlertDialog.Builder(this)
+                    .setTitle(R.string.action_restore)
+                    .setMessage(R.string.dialog_check_restore_if_sure)
+                    .setPositiveButton(R.string.yes_button, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (isExternalStorageReadable()) {
+                                File folder = new File(Environment.getExternalStorageDirectory() + "/Swiftnotes");
+                                boolean folderExists = false;
+
+                                if (folder.exists()) {
+                                    folderExists = true;
+                                }
+
+                                File backupFile = new File(folder, "swiftnotes_backup.json");
+                                boolean backupFileExists = false;
+
+                                if (backupFile.exists()) {
+                                    backupFileExists = true;
+                                    backupFilePath = backupFile.getAbsolutePath();
+                                }
+
+                                File notesFile = new File(getFilesDir() + "/notes.json");
+                                boolean notesFileExists = false;
+
+                                if (notesFile.exists())
+                                    notesFileExists = true;
+
+                                if (folderExists && backupFileExists && notesFileExists) {
+                                    restoreSuccessful = true;
+
+                                    InputStream is = null;
+                                    OutputStream os = null;
+
+                                    try {
+                                        is = new FileInputStream(backupFile);
+                                        os = new FileOutputStream(notesFile);
+
+                                    } catch (FileNotFoundException e) {
+                                        e.printStackTrace();
+                                        restoreSuccessful = false;
+                                    }
+
+                                    if (is != null && os != null) {
+                                        byte[] buf = new byte[1024];
+                                        int len;
+
+                                        try {
+                                            while ((len = is.read(buf)) > 0) {
+                                                os.write(buf, 0, len);
+                                            }
+
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                            restoreSuccessful = false;
+                                        }
+
+                                        try {
+                                            is.close();
+                                            os.close();
+
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                            restoreSuccessful = false;
+                                        }
+                                    }
+
+
+                                    if (restoreSuccessful) {
+                                        readFromJSON();
+                                        writeToJSON();
+                                        readFromJSON();
+
+                                        adapter.notifyDataSetChanged();
+
+                                        Toast toast = Toast.makeText(getApplicationContext(),
+                                                getResources().getString(R.string.toast_restore_successful),
+                                                Toast.LENGTH_SHORT);
+                                        toast.show();
+
+                                        //recreate Activity so adapter can inflate the notes
+                                        recreate();
+                                    }
+
+                                    else {
+                                        Toast toast = Toast.makeText(getApplicationContext(),
+                                                getResources().getString(R.string.toast_restore_unsuccessful),
+                                                Toast.LENGTH_SHORT);
+                                        toast.show();
+                                    }
+                                }
+
+                                //either folder or files weren't successfully created, dialog failed
+                                else {
+                                    showRestoreFailedDialog();
+                                }
+                            }
+
+                            //if external storage not readable, toast failed
+                            else {
+                                Toast toast = Toast.makeText(getApplicationContext(),
+                                        getResources().getString(R.string.toast_restore_unsuccessful),
+                                        Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                        }
+                    })
+                    .setNegativeButton(R.string.no_button, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .create();
+        }
+
+
+        else if (id == DIALOG_RESTORE_FAILED) {
+            return new AlertDialog.Builder(this)
+                    .setTitle(R.string.dialog_restore_failed_title)
+                    .setMessage(R.string.dialog_restore_failed)
+                    .setCancelable(true)
+                    .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .create();
+        }
+
+        return null;
+    }
+
+    protected void showBackupSuccessfulDialog() {
+        dismissDialog(DIALOG_BACKUP_CHECK);
+        MainActivity.this.showDialog(DIALOG_BACKUP_OK);
+    }
+
+    protected void showRestoreFailedDialog() {
+        dismissDialog(DIALOG_RESTORE_CHECK);
+        MainActivity.this.showDialog(DIALOG_RESTORE_FAILED);
+    }
+
+
     //deleteNote method, reconstructs the notes array without the un-required element
     protected void deleteNote(Context context, final int position) {
         try {
             new AlertDialog.Builder(context)
+                    .setTitle(R.string.dialog_delete_title)
                     .setMessage(getResources().getString(R.string.dialog_delete) +
                         " '" + notes.getJSONObject(position).getString("title") + "'?")
-                    .setPositiveButton(getResources().getString(R.string.yes_button), new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.yes_button, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             JSONArray newArray = new JSONArray();
@@ -382,7 +707,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                             writeToJSON();
 
                             //if no notes, show 'Press + to add new note' text, invisible otherwise
-                            if(notes.length() == 0)
+                            if (notes.length() == 0)
                                 noNotes.setVisibility(View.VISIBLE);
 
                             else
@@ -393,7 +718,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                             toast.show();
                         }
                     })
-                    .setNegativeButton(getResources().getString(R.string.no_button), new DialogInterface.OnClickListener() {
+                    .setNegativeButton(R.string.no_button, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                         }
@@ -464,7 +789,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                         writeToJSON();
 
                         //if no notes, show 'Press + to add new note' text, invisible otherwise
-                        if(notes.length() == 0)
+                        if (notes.length() == 0)
                             noNotes.setVisibility(View.VISIBLE);
 
                         else
@@ -551,7 +876,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
         //if delete pressed in context menu, call deleteNote method with position as argument
-        if(item.getTitle() == getResources().getString(R.string.action_delete)) {
+        if (item.getTitle() == getResources().getString(R.string.action_delete)) {
             deleteNote(this, info.position);
 
             return true;
@@ -571,237 +896,21 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //'Backup notes' pressed, copy contents from notes.json to swiftnotes_backup.json
-        //on external storage
+        //'Backup notes' pressed, ask user if sure
+        //if yes, copy contents from notes.json to swiftnotes_backup.json on external storage
         if (id == R.id.action_backup) {
-            if (isExternalStorageWritable()) {
-                //check if Swiftntotes folder exists, if not, create directory
-                File folder = new File(Environment.getExternalStorageDirectory() + "/Swiftnotes");
-                boolean folderCreated = true;
-
-                if (!folder.exists()) {
-                    folderCreated = folder.mkdir();
-                }
-
-                //check if backup file exists, if yes, delete and create new, if not, just create new
-                File backupFile = new File(folder, "swiftnotes_backup.json");
-                boolean backupFileCreated = false;
-
-                if (backupFile.exists()) {
-                    boolean backupFileDeleted = false;
-                    backupFileDeleted = backupFile.delete();
-
-                    if (backupFileDeleted) {
-                        try {
-                            backupFileCreated = backupFile.createNewFile();
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-
-                            backupFileCreated = false;
-                        }
-                    }
-                }
-
-                //if backup file doesn't exist, create new
-                else {
-                    try {
-                        backupFileCreated = backupFile.createNewFile();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-
-                        backupFileCreated = false;
-                    }
-                }
-
-                //check if notes.json exists
-                File notesFile = new File(getFilesDir() + "/notes.json");
-                boolean notesFileCreated = false;
-
-                if (notesFile.exists())
-                    notesFileCreated = true;
-
-                //if everything exists, stream content from notes.json to backup file
-                if (folderCreated && backupFileCreated && notesFileCreated) {
-                    boolean backupSuccessful = true;
-
-                    InputStream is = null;
-                    OutputStream os = null;
-
-                    try {
-                        is = new FileInputStream(notesFile);
-                        os = new FileOutputStream(backupFile);
-
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                        backupSuccessful = false;
-                    }
-
-                    if (is != null && os != null) {
-                        byte[] buf = new byte[1024];
-                        int len;
-
-                        try {
-                            while ((len = is.read(buf)) > 0) {
-                                os.write(buf, 0, len);
-                            }
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            backupSuccessful = false;
-                        }
-
-                        try {
-                            is.close();
-                            os.close();
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            backupSuccessful = false;
-                        }
-                    }
-
-                    if (backupSuccessful) {
-                        Toast toast = Toast.makeText(getApplicationContext(),
-                                getResources().getString(R.string.toast_backup_created)
-                                        + " " + backupFile.getAbsolutePath(),
-                                Toast.LENGTH_LONG);
-                        toast.show();
-                    }
-
-                    else {
-                        Toast toast = Toast.makeText(getApplicationContext(),
-                                getResources().getString(R.string.toast_backup_failed),
-                                Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-                }
-
-                //either folder or files weren't successfully created, toast failed
-                else {
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            getResources().getString(R.string.toast_backup_failed),
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-            }
+            MainActivity.this.showDialog(DIALOG_BACKUP_CHECK);
 
             return true;
         }
-
 
         //'Restore notes' pressed, ask user if sure
         //if yes, copy content from swiftnotes_backup.json from external storage to notes.json
         else if (id == R.id.action_restore) {
-            new AlertDialog.Builder(this)
-                    .setMessage(R.string.dialog_check_restore_if_sure)
-                    .setPositiveButton(getResources().getString(R.string.yes_button), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (isExternalStorageReadable()) {
-                                File folder = new File(Environment.getExternalStorageDirectory() + "/Swiftnotes");
-                                boolean folderExists = false;
-
-                                if (folder.exists()) {
-                                    folderExists = true;
-                                }
-
-                                File backupFile = new File(folder, "swiftnotes_backup.json");
-                                boolean backupFileExists = false;
-
-                                if (backupFile.exists()) {
-                                    backupFileExists = true;
-                                }
-
-                                File notesFile = new File(getFilesDir() + "/notes.json");
-                                boolean notesFileExists = false;
-
-                                if (notesFile.exists())
-                                    notesFileExists = true;
-
-                                if (folderExists && backupFileExists && notesFileExists) {
-                                    boolean restoreSuccessful = true;
-
-                                    InputStream is = null;
-                                    OutputStream os = null;
-
-                                    try {
-                                        is = new FileInputStream(backupFile);
-                                        os = new FileOutputStream(notesFile);
-
-                                    } catch (FileNotFoundException e) {
-                                        e.printStackTrace();
-                                        restoreSuccessful = false;
-                                    }
-
-                                    if (is != null && os != null) {
-                                        byte[] buf = new byte[1024];
-                                        int len;
-
-                                        try {
-                                            while ((len = is.read(buf)) > 0) {
-                                                os.write(buf, 0, len);
-                                            }
-
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                            restoreSuccessful = false;
-                                        }
-
-                                        try {
-                                            is.close();
-                                            os.close();
-
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                            restoreSuccessful = false;
-                                        }
-                                    }
-
-                                    if (restoreSuccessful) {
-                                        readFromJSON();
-                                        writeToJSON();
-                                        readFromJSON();
-
-                                        adapter.notifyDataSetChanged();
-
-                                        Toast toast = Toast.makeText(getApplicationContext(),
-                                                getResources().getString(R.string.toast_restore_successful),
-                                                Toast.LENGTH_SHORT);
-                                        toast.show();
-
-                                        //recreate Activity so adapter can inflate the notes
-                                        recreate();
-                                    }
-
-                                    else {
-                                        Toast toast = Toast.makeText(getApplicationContext(),
-                                                getResources().getString(R.string.toast_restore_unsuccessful),
-                                                Toast.LENGTH_SHORT);
-                                        toast.show();
-                                    }
-                                }
-
-                                //if folder or backup file don't exist, alert user
-                                else {
-                                    Toast toast = Toast.makeText(getApplicationContext(),
-                                            getResources().getString(R.string.toast_restore_failed),
-                                            Toast.LENGTH_LONG);
-                                    toast.show();
-                                }
-                            }
-                        }
-                    })
-                    .setNegativeButton(getResources().getString(R.string.no_button), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {}
-                    })
-            .show();
+            MainActivity.this.showDialog(DIALOG_RESTORE_CHECK);
 
             return true;
         }
-
 
         else if (id == R.id.action_rate_app) {
             final String appPackageName = getPackageName();
@@ -809,7 +918,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             new AlertDialog.Builder(this)
                     .setTitle(R.string.dialog_rate_title)
                     .setMessage(R.string.dialog_rate_message)
-                    .setPositiveButton(getResources().getString(R.string.yes_button), new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.yes_button, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             try {
@@ -821,7 +930,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                                         Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
                             }
                         }
-                    }).setNegativeButton(getResources().getString(R.string.no_button), new DialogInterface.OnClickListener() {
+                    }).setNegativeButton(R.string.no_button, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {}
             }).show();
@@ -829,26 +938,35 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             return true;
         }
 
+
         return false;
     }
 
 
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return true;
-        }
-
-        return false;
+        return Environment.MEDIA_MOUNTED.equals(state);
     }
 
     public boolean isExternalStorageReadable() {
         String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state) ||
-                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-            return true;
-        }
+        return Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
+    }
 
-        return false;
+
+    //when activity is resumed, re-typeface action bar title
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        TextView actionBarTitleView = null;
+        if (actionBarTitle != 0)
+            actionBarTitleView = (TextView) getWindow().findViewById(actionBarTitle);
+
+        if (actionBarTitleView != null) {
+            if (lobsterTwo != null)
+                actionBarTitleView.setTypeface(lobsterTwo);
+        }
     }
 }

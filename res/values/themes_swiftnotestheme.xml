@@ -4,7 +4,7 @@
 
   <style name="SwiftnotesTheme" parent="@style/_SwiftnotesTheme"/>
 
-  <style name="_SwiftnotesTheme" parent="android:Theme.Holo.Light">
+  <style name="_SwiftnotesTheme" parent="android:Theme.Holo.Light.DarkActionBar">
 
     <item name="android:textColorHighlight">#99ce0a31</item>
     <item name="android:textSelectHandleLeft">@drawable/swiftnotestheme_text_select_handle_left</item>

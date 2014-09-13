@@ -23,11 +23,11 @@
         android:layout_height="55dp"
         android:id="@+id/newNote"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:scaleType="fitXY"
         android:background="@drawable/ic_new_selector"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="25dp" />
+        android:layout_marginBottom="25dp"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/new_note_content_description" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -39,6 +39,8 @@
         android:textStyle="bold"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
