@@ -6,7 +6,7 @@
         android:title="@string/action_note_colour"
         android:orderInCategory="100"
         android:icon="@drawable/ic_note_colour"
-        android:showAsAction="always" />
+        android:showAsAction="ifRoom" />
 
     <item android:id="@+id/action_save"
         android:title="@string/action_save"

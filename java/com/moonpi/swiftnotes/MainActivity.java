@@ -74,7 +74,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     };
     */
 
-    private static final int NEW_NOTE_REQUEST = 15000; //requestCode for new note activity
+    private static final int NEW_NOTE_REQUEST = 15000; // requestCode for new note activity
     private static final int DIALOG_BACKUP_CHECK = 1;
     private static final int DIALOG_RESTORE_CHECK = 2;
     private static final int DIALOG_BACKUP_OK = 3;
@@ -94,7 +94,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private JSONArray notes;
 
 
-    //Custom notes adapter class
+    // Custom notes adapter class
     private class NoteAdapter extends BaseAdapter implements ListAdapter {
 
         Activity parentActivity;
@@ -141,7 +141,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 convertView = this.parentActivity.getLayoutInflater().inflate(R.layout.list_view_note, null);
             }
 
-            //initialize layout items
+            // Initialize layout items
             RelativeLayout relativeLayout = (RelativeLayout) convertView.findViewById(R.id.relativeLayout);
             TextView titleView = (TextView) convertView.findViewById(R.id.titleView);
             TextView bodyView = (TextView) convertView.findViewById(R.id.bodyView);
@@ -151,31 +151,32 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
             if (jsonData != null) {
                 try {
-                    //get JSON data to variables
+                    // Get JSON data to variables
                     String title = jsonData.getString("title");
                     String body = jsonData.getString("body");
                     String colour = jsonData.getString("colour");
                     final Boolean favoured = jsonData.getBoolean("favoured");
 
-                    //set note views background colours to colour in JSON file
+                    // Set note views background colours to colour in JSON file
                     relativeLayout.setBackgroundColor(Color.parseColor(colour));
 
                     favourite.setOnClickListener(new View.OnClickListener() {
-                        //if favourite was clicked
+                        // If favourite was clicked
                         @Override
                         public void onClick(View v) {
-                            if (!favoured) {
+                            if (!favoured)
                                 setFavourite(position, true);
-                            } else
+
+                            else
                                 setFavourite(position, false);
                         }
                     });
 
-                    if (favoured) {
+                    if (favoured)
                         favourite.setImageResource(R.drawable.ic_fav);
-                    } else {
+
+                    else
                         favourite.setImageResource(R.drawable.ic_unfav);
-                    }
 
                     titleView.setText(title);
                     bodyView.setText(body);
@@ -192,8 +193,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private NoteAdapter adapter;
 
 
-    //setFavourite method, sets a favourite in JSON file to true or false, in a specific position
-    //and sorts notes array
+    // setFavourite method, sets a favourite in JSON file to true or false, in a specific position
+    // And sorts notes array
     private void setFavourite(int position, Boolean favoured) {
         try {
             if (favoured) {
@@ -201,12 +202,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
                 newFavourite.put("favoured", true);
 
-                //sort notes array so favoured note is first
+                // Sort notes array so favoured note is first
                 if (position > 0) {
                     JSONArray newArray = new JSONArray();
                     newArray.put(0, newFavourite);
 
-                    //copy contents to new sorted array
+                    // Copy contents to new sorted array
                     for (int i = 0; i < notes.length(); i++) {
                         if (i != position) {
                             try {
@@ -244,7 +245,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 }
             }
 
-            //if un-favoured, set favoured to false and store into JSON
+            // If un-favoured, set favoured to false and store into JSON
             else {
                 JSONObject newFavourite = notes.getJSONObject(position);
 
@@ -262,7 +263,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
 
-    //write content to JSON file
+    // Write content to JSON file
     protected void writeToJSON() {
         try {
             BufferedWriter bWrite = new BufferedWriter(new OutputStreamWriter
@@ -277,7 +278,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         }
     }
 
-    //read content from JSON file
+    // Read content from JSON file
     protected void readFromJSON() {
         try {
             BufferedReader bRead = new BufferedReader(new InputStreamReader
@@ -295,7 +296,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             e.printStackTrace();
         }
 
-        //get notes array from root
+        // Get notes array from root
         try {
             notes = root.getJSONArray("notes");
 
@@ -318,8 +319,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //get lobster_two asset and create typeface
-        //set action bar title to lobster_two typeface
+        // Get lobster_two asset and create typeface
+        // Set action bar title to lobster_two typeface
         lobsterTwo = Typeface.createFromAsset(getAssets(), "lobster_two.otf");
 
         actionBarTitle = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
@@ -350,7 +351,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         ImageButton newNote = (ImageButton) findViewById(R.id.newNote);
         noNotes = (TextView)findViewById(R.id.noNotes);
 
-        //initialize NoteAdapter with notes array
+        // Initialize NoteAdapter with notes array
         adapter = new NoteAdapter(this, notes);
 
         registerForContextMenu(listView);
@@ -359,7 +360,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         listView.setOnItemClickListener(this);
         newNote.setOnClickListener(this);
 
-        //if no notes, show 'Press + to add new note' text, invisible otherwise
+        // If no notes, show 'Press + to add new note' text, invisible otherwise
         if (notes.length() == 0)
             noNotes.setVisibility(View.VISIBLE);
 
@@ -377,23 +378,39 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                     .setPositiveButton(R.string.yes_button, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if (isExternalStorageWritable()) {
-                                //check if Swiftntotes folder exists, if not, create directory
-                                File folder = new File(Environment.getExternalStorageDirectory() + "/Swiftnotes");
-                                boolean folderCreated = true;
+                            // If note array not empty, continue
+                            if (notes.length() > 0) {
+                                if (isExternalStorageWritable()) {
+                                    // Check if Swiftntotes folder exists, if not, create directory
+                                    File folder = new File(Environment.getExternalStorageDirectory() + "/Swiftnotes");
+                                    boolean folderCreated = true;
 
-                                if (!folder.exists()) {
-                                    folderCreated = folder.mkdir();
-                                }
+                                    if (!folder.exists()) {
+                                        folderCreated = folder.mkdir();
+                                    }
 
-                                //check if backup file exists, if yes, delete and create new, if not, just create new
-                                File backupFile = new File(folder, "swiftnotes_backup.json");
-                                boolean backupFileCreated = false;
+                                    // Check if backup file exists, if yes, delete and create new, if not, just create new
+                                    File backupFile = new File(folder, "swiftnotes_backup.json");
+                                    boolean backupFileCreated = false;
 
-                                if (backupFile.exists()) {
-                                    boolean backupFileDeleted = backupFile.delete();
+                                    if (backupFile.exists()) {
+                                        boolean backupFileDeleted = backupFile.delete();
 
-                                    if (backupFileDeleted) {
+                                        if (backupFileDeleted) {
+                                            try {
+                                                backupFileCreated = backupFile.createNewFile();
+                                                backupFilePath = backupFile.getAbsolutePath();
+
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+
+                                                backupFileCreated = false;
+                                            }
+                                        }
+                                    }
+
+                                    // If backup file doesn't exist, create new
+                                    else {
                                         try {
                                             backupFileCreated = backupFile.createNewFile();
                                             backupFilePath = backupFile.getAbsolutePath();
@@ -404,73 +421,68 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                                             backupFileCreated = false;
                                         }
                                     }
-                                }
 
-                                //if backup file doesn't exist, create new
-                                else {
-                                    try {
-                                        backupFileCreated = backupFile.createNewFile();
-                                        backupFilePath = backupFile.getAbsolutePath();
+                                    // Check if notes.json exists
+                                    File notesFile = new File(getFilesDir() + "/notes.json");
+                                    boolean notesFileCreated = false;
 
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
+                                    if (notesFile.exists())
+                                        notesFileCreated = true;
 
-                                        backupFileCreated = false;
-                                    }
-                                }
+                                    //If everything exists, stream content from notes.json to backup file
+                                    if (folderCreated && backupFileCreated && notesFileCreated) {
+                                        backupSuccessful = true;
 
-                                //check if notes.json exists
-                                File notesFile = new File(getFilesDir() + "/notes.json");
-                                boolean notesFileCreated = false;
-
-                                if (notesFile.exists())
-                                    notesFileCreated = true;
-
-                                //if everything exists, stream content from notes.json to backup file
-                                if (folderCreated && backupFileCreated && notesFileCreated) {
-                                    backupSuccessful = true;
-
-                                    InputStream is = null;
-                                    OutputStream os = null;
-
-                                    try {
-                                        is = new FileInputStream(notesFile);
-                                        os = new FileOutputStream(backupFile);
-
-                                    } catch (FileNotFoundException e) {
-                                        e.printStackTrace();
-                                        backupSuccessful = false;
-                                    }
-
-                                    if (is != null && os != null) {
-                                        byte[] buf = new byte[1024];
-                                        int len;
+                                        InputStream is = null;
+                                        OutputStream os = null;
 
                                         try {
-                                            while ((len = is.read(buf)) > 0) {
-                                                os.write(buf, 0, len);
+                                            is = new FileInputStream(notesFile);
+                                            os = new FileOutputStream(backupFile);
+
+                                        } catch (FileNotFoundException e) {
+                                            e.printStackTrace();
+                                            backupSuccessful = false;
+                                        }
+
+                                        if (is != null && os != null) {
+                                            byte[] buf = new byte[1024];
+                                            int len;
+
+                                            try {
+                                                while ((len = is.read(buf)) > 0) {
+                                                    os.write(buf, 0, len);
+                                                }
+
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                                backupSuccessful = false;
                                             }
 
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                            backupSuccessful = false;
+                                            try {
+                                                is.close();
+                                                os.close();
+
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                                backupSuccessful = false;
+                                            }
                                         }
 
-                                        try {
-                                            is.close();
-                                            os.close();
 
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                            backupSuccessful = false;
+                                        if (backupSuccessful) {
+                                            showBackupSuccessfulDialog();
+                                        }
+
+                                        else {
+                                            Toast toast = Toast.makeText(getApplicationContext(),
+                                                    getResources().getString(R.string.toast_backup_failed),
+                                                    Toast.LENGTH_SHORT);
+                                            toast.show();
                                         }
                                     }
 
-
-                                    if (backupSuccessful) {
-                                        showBackupSuccessfulDialog();
-                                    }
-
+                                    // Either folder or files weren't successfully created, toast failed
                                     else {
                                         Toast toast = Toast.makeText(getApplicationContext(),
                                                 getResources().getString(R.string.toast_backup_failed),
@@ -479,7 +491,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                                     }
                                 }
 
-                                //either folder or files weren't successfully created, toast failed
+                                // If external storage not writable, toast failed
                                 else {
                                     Toast toast = Toast.makeText(getApplicationContext(),
                                             getResources().getString(R.string.toast_backup_failed),
@@ -488,10 +500,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                                 }
                             }
 
-                            //if external storage not writable, toast failed
+                            // If notes array is empty, toast backup failed
                             else {
                                 Toast toast = Toast.makeText(getApplicationContext(),
-                                        getResources().getString(R.string.toast_backup_failed),
+                                        getResources().getString(R.string.toast_backup_no_notes),
                                         Toast.LENGTH_SHORT);
                                 toast.show();
                             }
@@ -604,7 +616,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                                                 Toast.LENGTH_SHORT);
                                         toast.show();
 
-                                        //recreate Activity so adapter can inflate the notes
+                                        // Recreate Activity so adapter can inflate the notes
                                         recreate();
                                     }
 
@@ -616,13 +628,13 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                                     }
                                 }
 
-                                //either folder or files weren't successfully created, dialog failed
+                                // Either folder or files weren't successfully created, dialog failed
                                 else {
                                     showRestoreFailedDialog();
                                 }
                             }
 
-                            //if external storage not readable, toast failed
+                            // If external storage not readable, toast failed
                             else {
                                 Toast toast = Toast.makeText(getApplicationContext(),
                                         getResources().getString(R.string.toast_restore_unsuccessful),
@@ -669,7 +681,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
 
-    //deleteNote method, reconstructs the notes array without the un-required element
+    // deleteNote method, reconstructs the notes array without the un-required element
     protected void deleteNote(Context context, final int position) {
         try {
             new AlertDialog.Builder(context)
@@ -681,7 +693,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                         public void onClick(DialogInterface dialog, int which) {
                             JSONArray newArray = new JSONArray();
 
-                            //copy contents to new array, without the removed item
+                            // Copy contents to new array, without the removed item
                             for (int i = 0; i < notes.length(); i++) {
                                 if (i != position) {
                                     try {
@@ -706,7 +718,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
                             writeToJSON();
 
-                            //if no notes, show 'Press + to add new note' text, invisible otherwise
+                            // If no notes, show 'Press + to add new note' text, invisible otherwise
                             if (notes.length() == 0)
                                 noNotes.setVisibility(View.VISIBLE);
 
@@ -733,7 +745,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     @Override
     public void onClick(View v) {
-        //if new note button pressed, start edit note activity with new note request code
+        // If new note button pressed, start edit note activity with new note request code
         if (v.getId() == R.id.newNote) {
             Intent intent = new Intent(this, EditActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -744,14 +756,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         }
     }
 
-    //item clicked in listView, start EditActivity and pass extras
+    // Item clicked in listView, start EditActivity and pass extras
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, EditActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         try {
-            //package current note content and send to edit note activity
+            // Package current note content and send to edit note activity
             intent.putExtra("title", notes.getJSONObject(position).getString("title"));
             intent.putExtra("body", notes.getJSONObject(position).getString("body"));
             intent.putExtra("colour", notes.getJSONObject(position).getString("colour"));
@@ -772,10 +784,10 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             Bundle mBundle = data.getExtras();
 
             if (mBundle != null) {
-                //if new note was saved
+                // If new note was saved
                 if (requestCode == NEW_NOTE_REQUEST) {
                     try {
-                        //add new note to array
+                        // Add new note to array
                         JSONObject newNote = new JSONObject();
                         newNote.put("title", mBundle.getString("title"));
                         newNote.put("body", mBundle.getString("body"));
@@ -788,7 +800,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
                         writeToJSON();
 
-                        //if no notes, show 'Press + to add new note' text, invisible otherwise
+                        // If no notes, show 'Press + to add new note' text, invisible otherwise
                         if (notes.length() == 0)
                             noNotes.setVisibility(View.VISIBLE);
 
@@ -804,17 +816,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                     }
                 }
 
-                //if existing note was saved
+                // If existing note was saved
                 else {
                     try {
-                        //update array with new data
+                        // Update array with new data
                         JSONObject newNote = notes.getJSONObject(requestCode);
                         newNote.put("title", mBundle.getString("title"));
                         newNote.put("body", mBundle.getString("body"));
                         newNote.put("colour", mBundle.getString("colour"));
                         newNote.put("fontSize", mBundle.getInt("fontSize"));
 
-                        //update note at position
+                        // Update note at position
                         notes.put(requestCode, newNote);
                         adapter.notifyDataSetChanged();
 
@@ -840,7 +852,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
             if (requestCode == NEW_NOTE_REQUEST) {
                 if (mBundle != null) {
-                    //if new note discarded, show toast
+                    // If new note discarded, show toast
                     if (mBundle.getString("request").equals("discard")) {
                         Toast toast = Toast.makeText(getApplicationContext(),
                                 getResources().getString(R.string.toast_empty_note_discarded), Toast.LENGTH_SHORT);
@@ -851,8 +863,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
             else {
                 if (mBundle != null) {
-                    //if delete pressed in EditActivity, call deleteNote method with
-                    //requestCode as position
+                    // If delete pressed in EditActivity, call deleteNote method with
+                    // requestCode as position
                     if (mBundle.getString("request").equals("delete"))
                         deleteNote(this, requestCode);
                 }
@@ -872,11 +884,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        //get info about long-pressed item
+        // Get info about long-pressed item
         final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
-        //if delete pressed in context menu, call deleteNote method with position as argument
-        if (item.getTitle() == getResources().getString(R.string.action_delete)) {
+        // If delete pressed in context menu, call deleteNote method with position as argument
+        if (item.getTitle() ==  getResources().getString(R.string.action_delete)) {
             deleteNote(this, info.position);
 
             return true;
@@ -896,16 +908,16 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //'Backup notes' pressed, ask user if sure
-        //if yes, copy contents from notes.json to swiftnotes_backup.json on external storage
+        // 'Backup notes' pressed, ask user if sure
+        // If yes, copy contents from notes.json to swiftnotes_backup.json on external storage
         if (id == R.id.action_backup) {
             MainActivity.this.showDialog(DIALOG_BACKUP_CHECK);
 
             return true;
         }
 
-        //'Restore notes' pressed, ask user if sure
-        //if yes, copy content from swiftnotes_backup.json from external storage to notes.json
+        // 'Restore notes' pressed, ask user if sure
+        // If yes, copy content from swiftnotes_backup.json from external storage to notes.json
         else if (id == R.id.action_restore) {
             MainActivity.this.showDialog(DIALOG_RESTORE_CHECK);
 
@@ -945,17 +957,19 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
+
         return Environment.MEDIA_MOUNTED.equals(state);
     }
 
     public boolean isExternalStorageReadable() {
         String state = Environment.getExternalStorageState();
+
         return Environment.MEDIA_MOUNTED.equals(state) ||
                 Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
     }
 
 
-    //when activity is resumed, re-typeface action bar title
+    // When activity is resumed, re-typeface action bar title
     @Override
     protected void onResume() {
         super.onResume();

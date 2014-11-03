@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 public class EditActivity extends Activity {
 
-    private static final int NEW_NOTE_REQUEST = 15000; //requestCode for new note activity
+    private static final int NEW_NOTE_REQUEST = 15000; // requestCode for new note activity
 
     private EditText titleEdit, bodyEdit;
     private RelativeLayout relativeLayoutEdit;
@@ -26,23 +26,23 @@ public class EditActivity extends Activity {
 
     private Bundle bundle;
 
-    private String [] colourArr = {"#44A1EB", //blue (0)
-                                   "#77DDBB", //teal (1)
-                                   "#BBE535", //green (2)
-                                   "#EEEE22", //yellow (3)
-                                   "#FF8800", //orange (4)
-                                   "#F56545", //red (5)
-                                   "#FF3D7F", //pink (6)
-                                   "#BE80FF", //purple (7)
-                                   "#FFFFFF"}; //white (8)
+    private String [] colourArr = {"#44A1EB", // blue (0)
+                                   "#77DDBB", // teal (1)
+                                   "#BBE535", // green (2)
+                                   "#EEEE22", // yellow (3)
+                                   "#FF8800", // orange (4)
+                                   "#F56545", // red (5)
+                                   "#FF3D7F", // pink (6)
+                                   "#BE80FF", // purple (7)
+                                   "#FFFFFF"};// white (8)
 
     private String [] colourNameArray;
 
-    private int [] fontSizeArr = {14, 18, 22}; //0 for small, 1 for medium, 2 for large
+    private int [] fontSizeArr = {14, 18, 22}; // 0 for small, 1 for medium, 2 for large
     private String [] fontSizeNameArray;
 
-    private String colour = "#FFFFFF"; //white default
-    private int fontSize = 18; //medium default
+    private String colour = "#FFFFFF"; // white default
+    private int fontSize = 18; // Medium default
 
 
     @Override
@@ -64,7 +64,7 @@ public class EditActivity extends Activity {
         relativeLayoutEdit = (RelativeLayout)findViewById(R.id.relativeLayoutEdit);
         imm = (InputMethodManager) this.getSystemService(INPUT_METHOD_SERVICE);
 
-        //initialize colours and font sizes array
+        // Initialize colours and font sizes array
         colourNameArray = new String [] {getResources().getString(R.string.blue),
                 getResources().getString(R.string.teal),
                 getResources().getString(R.string.green),
@@ -82,7 +82,7 @@ public class EditActivity extends Activity {
         bundle = getIntent().getExtras();
 
         if (bundle != null) {
-            //if current note is not a new one, initialize colour, EditTexts and font size
+            // If current note is not a new one, initialize colour, EditTexts and font size
             if (bundle.getInt("requestCode") != NEW_NOTE_REQUEST) {
                 colour = bundle.getString("colour");
                 titleEdit.setText(bundle.getString("title"));
@@ -90,19 +90,19 @@ public class EditActivity extends Activity {
                 bodyEdit.setTextSize(TypedValue.COMPLEX_UNIT_SP, bundle.getInt("fontSize"));
             }
 
-            //if current note is new, request keyboard focus to Title
+            // If current note is new, request keyboard focus to Title
             if (bundle.getInt("requestCode") == NEW_NOTE_REQUEST) {
                 titleEdit.requestFocus();
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
             }
 
-            //set background colour to colour from JSON file
+            // Set background colour to colour from JSON file
             relativeLayoutEdit.setBackgroundColor(Color.parseColor(colour));
         }
     }
 
 
-    //check whether EditTexts are empty or not
+    // Check whether EditTexts are empty or not
     protected boolean isEmpty(EditText editText) {
         return editText.getText().toString().trim().length() == 0;
     }
@@ -118,7 +118,7 @@ public class EditActivity extends Activity {
     protected void saveChanges() {
         Intent intent = new Intent();
 
-        //package everything and send back to activity with OK
+        // Package everything and send back to activity with OK
         intent.putExtra("title", titleEdit.getText().toString());
         intent.putExtra("body", bodyEdit.getText().toString());
         intent.putExtra("colour", colour);
@@ -144,16 +144,16 @@ public class EditActivity extends Activity {
         int id = item.getItemId();
 
         if (id == R.id.action_note_colour) {
-            //user picks colour from array
+            // User picks colour from array
             new AlertDialog.Builder(this)
                     .setTitle(getResources().getString(R.string.dialog_note_colour))
                     .setItems(colourNameArray, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //color is updated with new pick
+                            // Color is updated with new pick
                             colour = colourArr[which];
 
-                            //background color is changed
+                            // Background color is changed
                             relativeLayoutEdit.setBackgroundColor(Color.parseColor(colour));
                         }
                     }).setNeutralButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -165,8 +165,8 @@ public class EditActivity extends Activity {
         }
 
         else if (id == R.id.action_save) {
-            //if EditTexts are not empty, save and finish, else toast
-            if(!isEmpty(titleEdit) && !isEmpty(bodyEdit))
+            // If EditTexts are not empty, save and finish, else toast
+            if(!isEmpty(titleEdit))
                 saveChanges();
 
             else
@@ -175,17 +175,17 @@ public class EditActivity extends Activity {
             return true;
         }
 
-        else if(id == R.id.action_font_size) {
-            //user picks font size from array
+        else if (id == R.id.action_font_size) {
+            // User picks font size from array
             new AlertDialog.Builder(this)
                     .setTitle(getResources().getString(R.string.dialog_font_size))
                     .setItems(fontSizeNameArray, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            //font size is updated with new pick
+                            // Font size is updated with new pick
                             fontSize = fontSizeArr[which];
 
-                            //font size is changed
+                            // Font size is changed
                             bodyEdit.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
                         }
                     }).setNeutralButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -198,7 +198,7 @@ public class EditActivity extends Activity {
 
         else if (id == R.id.action_delete) {
             if (bundle != null) {
-                //if current note is new, toast cannot delete
+                // If current note is new, toast cannot delete
                 if (bundle.getInt("requestCode") == NEW_NOTE_REQUEST) {
                     Toast toast = Toast.makeText(getApplicationContext(),
                             getResources().getString(R.string.toast_cannot_delete_new_note),
@@ -206,7 +206,7 @@ public class EditActivity extends Activity {
                     toast.show();
                 }
 
-                //if current note is not new, request note delete in onActivityResult
+                // If current note is not new, request note delete in onActivityResult
                 else {
                     Intent intent = new Intent();
 
@@ -224,7 +224,7 @@ public class EditActivity extends Activity {
             return true;
         }
 
-        else if(id == android.R.id.home) {
+        else if (id == android.R.id.home) {
             onBackPressed();
             return true;
         }
@@ -235,60 +235,74 @@ public class EditActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        //back or home up pressed
-        //ask user if note should be saved or not
-        //if yes, save and finish
-        //if no, go back without saving; if new note, request discard empty note toast
-        new AlertDialog.Builder(this)
-                .setMessage(getResources().getString(R.string.dialog_save_changes))
-                .setPositiveButton(getResources().getString(R.string.yes_button), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(!isEmpty(titleEdit) && !isEmpty(bodyEdit))
-                            saveChanges();
+        // Back or home up pressed
+        // Check if note has changed, if yes
+        // Ask user if note should be saved or not
+        // If yes, save and finish
+        // If no, go back without saving; if new note, request discard empty note toast
 
-                        else
-                            toastEditTextCannotBeEmpty();
-                    }
-                })
-                .setNegativeButton(getResources().getString(R.string.no_button), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (bundle != null) {
-                            if (bundle.getInt("requestCode") == NEW_NOTE_REQUEST) {
-                                Intent intent = new Intent();
+        if (!(titleEdit.getText().toString().equals(bundle.getString("title"))) ||
+            !(bodyEdit.getText().toString().equals(bundle.getString("body")))) {
 
-                                intent.putExtra("request", "discard");
+            new AlertDialog.Builder(this)
+                    .setMessage(getResources().getString(R.string.dialog_save_changes))
+                    .setPositiveButton(getResources().getString(R.string.yes_button), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (!isEmpty(titleEdit))
+                                saveChanges();
 
-                                setResult(RESULT_CANCELED, intent);
+                            else
+                                toastEditTextCannotBeEmpty();
+                        }
+                    })
+                    .setNegativeButton(getResources().getString(R.string.no_button), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (bundle != null) {
+                                if (bundle.getInt("requestCode") == NEW_NOTE_REQUEST) {
+                                    Intent intent = new Intent();
 
-                                imm.hideSoftInputFromWindow(titleEdit.getWindowToken(), 0);
+                                    intent.putExtra("request", "discard");
 
-                                finish();
-                                overridePendingTransition(0, 0);
-                            }
+                                    setResult(RESULT_CANCELED, intent);
 
-                            else {
-                                setResult(RESULT_CANCELED);
+                                    imm.hideSoftInputFromWindow(titleEdit.getWindowToken(), 0);
 
-                                imm.hideSoftInputFromWindow(titleEdit.getWindowToken(), 0);
+                                    finish();
+                                    overridePendingTransition(0, 0);
+                                }
 
-                                finish();
-                                overridePendingTransition(0, 0);
+                                else {
+                                    setResult(RESULT_CANCELED);
+
+                                    imm.hideSoftInputFromWindow(titleEdit.getWindowToken(), 0);
+
+                                    finish();
+                                    overridePendingTransition(0, 0);
+                                }
                             }
                         }
-                    }
-                })
-        .show();
+                    })
+                    .show();
+        }
+
+        // If note hasn't changed, finish activity and go back
+        else {
+            imm.hideSoftInputFromWindow(titleEdit.getWindowToken(), 0);
+
+            finish();
+            overridePendingTransition(0, 0);
+        }
     }
 
 
-    //when window focus changed, hide keyboard
+    // When window focus changed, hide keyboard
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
-        if(!hasFocus)
+        if (!hasFocus)
             imm.hideSoftInputFromWindow(titleEdit.getWindowToken(), 0);
     }
 }

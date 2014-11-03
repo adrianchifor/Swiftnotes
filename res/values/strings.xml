@@ -56,8 +56,9 @@
     <string name="toast_note_saved">Note saved</string>
     <string name="toast_empty_note_discarded">Empty note discarded</string>
     <string name="toast_cannot_delete_new_note">Note not created yet</string>
-    <string name="toast_edittext_cannot_be_empty">Title and note cannot be empty</string>
+    <string name="toast_edittext_cannot_be_empty">Title cannot be empty</string>
     <string name="toast_backup_failed">Backup unsuccessful</string>
+    <string name="toast_backup_no_notes">No notes to backup</string>
     <string name="toast_restore_successful">Notes restored</string>
     <string name="toast_restore_unsuccessful">Restore unsuccessful</string>
 
