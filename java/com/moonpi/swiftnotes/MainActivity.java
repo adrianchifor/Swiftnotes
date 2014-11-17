@@ -44,7 +44,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 
-public class MainActivity extends Activity implements AdapterView.OnItemClickListener, View.OnClickListener{
+public class MainActivity extends Activity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     /*
     Copyright © 2014 MoonPi
@@ -109,20 +109,16 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         @Override
         public int getCount() {
-            if (this.adapterData != null) {
+            if (this.adapterData != null)
                 return this.adapterData.length();
-            }
-
             else
                 return 0;
         }
 
         @Override
         public JSONObject getItem(int position) {
-            if (this.adapterData != null) {
+            if (this.adapterData != null)
                 return this.adapterData.optJSONObject(position);
-            }
-
             else
                 return null;
         }
@@ -130,7 +126,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         @Override
         public long getItemId(int position) {
             JSONObject jsonObject = getItem(position);
-
             return jsonObject.optLong("id");
         }
 
@@ -164,17 +159,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                         // If favourite was clicked
                         @Override
                         public void onClick(View v) {
-                            if (!favoured)
-                                setFavourite(position, true);
-
-                            else
-                                setFavourite(position, false);
+                            setFavourite(position, !favoured);
                         }
                     });
 
                     if (favoured)
                         favourite.setImageResource(R.drawable.ic_fav);
-
                     else
                         favourite.setImageResource(R.drawable.ic_unfav);
 
@@ -208,7 +198,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                     newArray.put(0, newFavourite);
 
                     // Copy contents to new sorted array
-                    for (int i = 0; i < notes.length(); i++) {
+                    for (int i = 0; i < notes.length(); ++i) {
                         if (i != position) {
                             try {
                                 newArray.put(notes.get(i));
@@ -363,7 +353,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         // If no notes, show 'Press + to add new note' text, invisible otherwise
         if (notes.length() == 0)
             noNotes.setVisibility(View.VISIBLE);
-
         else
             noNotes.setVisibility(View.INVISIBLE);
     }
@@ -803,7 +792,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                         // If no notes, show 'Press + to add new note' text, invisible otherwise
                         if (notes.length() == 0)
                             noNotes.setVisibility(View.VISIBLE);
-
                         else
                             noNotes.setVisibility(View.INVISIBLE);
 
@@ -912,19 +900,19 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         // If yes, copy contents from notes.json to swiftnotes_backup.json on external storage
         if (id == R.id.action_backup) {
             MainActivity.this.showDialog(DIALOG_BACKUP_CHECK);
-
+            
             return true;
         }
 
         // 'Restore notes' pressed, ask user if sure
         // If yes, copy content from swiftnotes_backup.json from external storage to notes.json
-        else if (id == R.id.action_restore) {
+        if (id == R.id.action_restore) {
             MainActivity.this.showDialog(DIALOG_RESTORE_CHECK);
 
             return true;
         }
 
-        else if (id == R.id.action_rate_app) {
+        if (id == R.id.action_rate_app) {
             final String appPackageName = getPackageName();
 
             new AlertDialog.Builder(this)
