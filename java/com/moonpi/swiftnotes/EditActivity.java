@@ -164,18 +164,17 @@ public class EditActivity extends Activity {
             return true;
         }
 
-        else if (id == R.id.action_save) {
+        if (id == R.id.action_save) {
             // If EditTexts are not empty, save and finish, else toast
             if(!isEmpty(titleEdit))
                 saveChanges();
-
             else
                 toastEditTextCannotBeEmpty();
 
             return true;
         }
 
-        else if (id == R.id.action_font_size) {
+        if (id == R.id.action_font_size) {
             // User picks font size from array
             new AlertDialog.Builder(this)
                     .setTitle(getResources().getString(R.string.dialog_font_size))
@@ -196,7 +195,7 @@ public class EditActivity extends Activity {
             return true;
         }
 
-        else if (id == R.id.action_delete) {
+        if (id == R.id.action_delete) {
             if (bundle != null) {
                 // If current note is new, toast cannot delete
                 if (bundle.getInt("requestCode") == NEW_NOTE_REQUEST) {
@@ -224,7 +223,7 @@ public class EditActivity extends Activity {
             return true;
         }
 
-        else if (id == android.R.id.home) {
+        if (id == android.R.id.home) {
             onBackPressed();
             return true;
         }
@@ -251,7 +250,6 @@ public class EditActivity extends Activity {
                         public void onClick(DialogInterface dialog, int which) {
                             if (!isEmpty(titleEdit))
                                 saveChanges();
-
                             else
                                 toastEditTextCannotBeEmpty();
                         }
