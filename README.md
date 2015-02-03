@@ -4,7 +4,7 @@
 
 This repo contains the official source code for Swiftnotes.
 
-Current app version is 2.0.1.
+Current app version is 2.0.2.
 
 ### License
 
