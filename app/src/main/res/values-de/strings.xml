@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Swiftnotes</string>
+    <string name="title_edit_notes_activity">Notizen</string>
+    <!-- -->
+    <string name="no_notes_text">Drücke \'+\' um eine neue Notiz hinzuzufügen</string>
+    <string name="note_title">Titel</string>
+    <string name="note_body">Notiz</string>
+    <!-- -->
+    <string name="yes_button">Ja</string>
+    <string name="no_button">Nein</string>
+    <!-- -->
+    <string-array name="colourNames">
+        <item>Blau</item>
+        <item>Türkis</item>
+        <item>Grün</item>
+        <item>Gelb</item>
+        <item>Orange</item>
+        <item>Rot</item>
+        <item>Rosa</item>
+        <item>Lila</item>
+        <item>Weiß</item>
+    </string-array>
+    <!-- -->
+    <string-array name="fontSizeNames">
+        <item>Klein</item>
+        <item>Medium</item>
+        <item>Groß</item>
+    </string-array>
+    <!-- -->
+    <string name="action_search">Suche</string>
+    <string name="action_rate_app">App bewerten</string>
+    <string name="action_backup">Notizen sichern</string>
+    <string name="action_restore">Notizen wiederherstellen</string>
+    <string name="action_note_colour">Farbe der Notiz</string>
+    <string name="action_save">Speichern</string>
+    <string name="action_delete">Löschen</string>
+    <string name="action_delete_selected_number">Ausgewählt</string>
+    <string name="action_font_size">Schriftgröße der Notiz</string>
+    <string name="action_hide_body">Ausblenden Hinweis Stelle in der Liste</string>
+    <string name="action_show_body">Anzeigen Hinweis Stelle in der Liste</string>
+    <!-- -->
+    <string name="dialog_delete">Ausgewählte Erläuterungen werden gelöscht!</string>
+    <string name="dialog_note_colour">Farbe der Notiz ändern</string>
+    <string name="dialog_save_changes">Änderungen speichern?</string>
+    <string name="dialog_font_size">Schriftgröße der Notiz ändern</string>
+    <string name="dialog_rate_title">App bewerten</string>
+    <string name="dialog_rate_message">App im Play Store öffnen?
+        (Danke für deine Bewertung! Wir wissen das sehr zu schätzen!)</string>
+    <string name="dialog_check_backup_if_sure">Bist du dir sicher, dass du ein Backup der Notizen machen willst?</string>
+    <string name="dialog_backup_created_title">Backup erfolgreich</string>
+    <string name="dialog_backup_created">Backup erstellt in</string>
+    <string name="dialog_check_restore_if_sure">Bist du dir sicher, dass du die Notizen wiederherstellen willst?
+        (Kann nicht rückgängig gemacht werden)</string>
+    <string name="dialog_restore_failed_title">Kein Backup gefunden</string>
+    <string name="dialog_restore_failed">Um die Notizen wiederherzustellen, muss die Backup Datei
+        in \'External/Swiftnotes/swiftnotes_backup.json\' sein</string>
+    <!-- -->
+    <string name="new_note_content_description">Neue Notiz</string>
+    <string name="favourite_content_description">Favorit</string>
+    <!-- -->
+    <string name="toast_deleted">Löschen erfolgreich</string>
+    <string name="toast_new_note">Notiz erstellt</string>
+    <string name="toast_note_saved">Notiz gespeichert</string>
+    <string name="toast_empty_note_discarded">Leere Notiz verworfen</string>
+    <string name="toast_cannot_delete_new_note">Notiz nicht erstellt</string>
+    <string name="toast_edittext_cannot_be_empty">Der Titel kann nicht leer sein</string>
+    <string name="toast_note_body_hidden">Hinweis Körper wird nun Notizen Liste ausgeblendet werden</string>
+    <string name="toast_note_body_showing">Textkörper der Notiz wird jetzt angezeigt in Notizen</string>
+    <string name="toast_backup_failed">Backup nicht erfolgreich</string>
+    <string name="toast_backup_no_notes">Keine Notizen für das Backup</string>
+    <string name="toast_restore_successful">Notizen wiederhergestellt</string>
+    <string name="toast_restore_unsuccessful">Wiederherstellung nicht erfolgreich</string>
+
+</resources>

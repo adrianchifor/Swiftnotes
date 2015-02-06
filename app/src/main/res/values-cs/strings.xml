@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Swiftnotes</string>
+    <string name="title_edit_notes_activity">Poznámka</string>
+    <!-- -->
+    <string name="no_notes_text">Stiskni \'+\' pro přidání poznámky</string>
+    <string name="note_title">Předmět</string>
+    <string name="note_body">Poznámka</string>
+    <!-- -->
+    <string name="yes_button">Ano</string>
+    <string name="no_button">Ne</string>
+    <!-- -->
+    <string-array name="colourNames">
+        <item>Modrá</item>
+        <item>Tyrkysová</item>
+        <item>Zelená</item>
+        <item>Žlutá</item>
+        <item>Oranžová</item>
+        <item>Červená</item>
+        <item>Růžová</item>
+        <item>Fialová</item>
+        <item>Bílá</item>
+    </string-array>
+    <!-- -->
+    <string-array name="fontSizeNames">
+        <item>Malé</item>
+        <item>Střední</item>
+        <item>Velké</item>
+    </string-array>
+    <!-- -->
+    <string name="action_search">Vyhledávání</string>
+    <string name="action_rate_app">Hodnotit aplikaci</string>
+    <string name="action_backup">Zálohovat poznámky</string>
+    <string name="action_restore">Obnovit poznámky</string>
+    <string name="action_note_colour">Barva poznámky</string>
+    <string name="action_save">Uložit</string>
+    <string name="action_delete">Smazat</string>
+    <string name="action_delete_selected_number">Vybraný</string>
+    <string name="action_font_size">Velikost písma poznámky</string>
+    <string name="action_hide_body">Skrýt poznámku tělo v seznamu</string>
+    <string name="action_show_body">Zobrazit poznámku tělo v seznamu</string>
+    <!-- -->
+    <string name="dialog_delete">Vybrané poznámky budou smazány!</string>
+    <string name="dialog_note_colour">Změnit barvu poznámky</string>
+    <string name="dialog_save_changes">Uložit změny?</string>
+    <string name="dialog_font_size">Změnit velikost písma poznámky</string>
+    <string name="dialog_rate_title">Hodnotit aplikaci</string>
+    <string name="dialog_rate_message">Otevřít aplikaci v Obchodě Play?
+        (Děkujeme za vaše hodnocení! Opravdu si toho vážíme!)</string>
+    <string name="dialog_check_backup_if_sure">Opravdu chcete zálohovat stávající poznámky?</string>
+    <string name="dialog_backup_created_title">Úspěšně zálohováno</string>
+    <string name="dialog_backup_created">Záloha vytvořena v</string>
+    <string name="dialog_check_restore_if_sure">Opravdu chcete obnovit poznámky ze zálohy?
+        (Nelze vrátit zpět)</string>
+    <string name="dialog_restore_failed_title">Záloha nenalezena</string>
+    <string name="dialog_restore_failed">Pro obnovení poznámek, soubor zálohy
+        musí být v \'External/Swiftnotes/swiftnotes_backup.json\'</string>
+    <!-- -->
+    <string name="new_note_content_description">Nová poznámka</string>
+    <string name="favourite_content_description">Oblíbené</string>
+    <!-- -->
+    <string name="toast_deleted">Odstranit úspěšné</string>
+    <string name="toast_new_note">Poznámka vytvořena</string>
+    <string name="toast_note_saved">Poznámka uložena</string>
+    <string name="toast_empty_note_discarded">Prázdná poznámka zahozena</string>
+    <string name="toast_cannot_delete_new_note">Poznámka ještě nebyla vytvořena</string>
+    <string name="toast_edittext_cannot_be_empty">Předmět nemůže být prázdný</string>
+    <string name="toast_note_body_hidden">Poznámka tělo bude nyní se skrývá v seznamu poznámek</string>
+    <string name="toast_note_body_showing">Poznámka tělo bude nyní uveden v seznamu poznámek</string>
+    <string name="toast_backup_failed">Zálohování se nezdařilo</string>
+    <string name="toast_backup_no_notes">Žádné poznámky k zálohování</string>
+    <string name="toast_restore_successful">Poznámky obnoveny</string>
+    <string name="toast_restore_unsuccessful">Obnova se nezdařila</string>
+
+</resources>
