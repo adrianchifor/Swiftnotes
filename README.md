@@ -1,10 +1,21 @@
-## Swiftnotes
+# Swiftnotes
 
-[Swiftnotes](https://play.google.com/store/apps/details?id=com.moonpi.swiftnotes) is a note taking app that focuses on simplicity and speed. It offers you a quick and easy way to stay organized, capture your thoughts, reminders or anything that's on your mind, any time, anywhere. No extra unnecessary features, just notes.
+[Swiftnotes](https://play.google.com/store/apps/details?id=com.moonpi.swiftnotes) is a note taking app that takes simplicity and speed to a whole new level. It offers you a quick and easy way to stay organised, capture your thoughts, reminders or anything that's on your mind, any time, anywhere. No extra unnecessary features, just notes. For screenshots and more information visit the [Google PlayStore.](https://play.google.com/store/apps/details?id=com.moonpi.swiftnotes)
 
-This repo contains the official source code for Swiftnotes.
+This repo contains the official source code of Swiftnotes for Android.
 
-Current app version is 2.0.1.
+Current app version is 3.0.2.
+
+### Build
+
+Steps on how to build Swiftnotes:
+- Make sure you have Android Studio, Gradle v1.0.0 and the required Android SDK Tools installed (21.1.2 Build tools)
+- Clone this repository
+- Open Android Studio -> File -> Import Project
+- Select build.gradle in Swiftnotes
+- Go to Project Structure and make sure Android SDK and JDK paths are set
+- Build -> Rebuild Project and Sync Gradle
+- Good to go!
 
 ### License
 
@@ -18,4 +29,6 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 ### Donate
 
-To support development, you can donate with PayPal or Card using the following [link](http://goo.gl/TQRlTa). For Bitcoin donations, our address is: 1NZGAU1rEs1zBpwdjmnBjiyRsJHfycWhSF. The donations help us implement new features and deliver updates at a faster rate. Any amount would be most appreciated. Thank you!
+To support development, you can donate with PayPal or Card using this [link](http://goo.gl/TQRlTa). For Bitcoin donations, our address is: 1NZGAU1rEs1zBpwdjmnBjiyRsJHfycWhSF. 
+
+Donations help us implement new features and deliver updates at a faster rate. Any amount would be most appreciated. Thank you!
