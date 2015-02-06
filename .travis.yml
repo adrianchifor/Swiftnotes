@@ -1,0 +1,25 @@
+language: android
+
+cache: false
+sudo: false
+
+before_install:
+    - chmod +x gradlew
+    - echo yes | android update sdk --all --filter build-tools-21.1.2 --no-ui --force > /dev/null
+
+android:
+    components:
+        - platform-tools
+        - tools
+        - build-tools-21.1.2
+        - android-21
+        - sys-img-armeabi-v7a-android-21
+
+    licenses:
+        - 'android-sdk-license-.+'
+
+before_script:
+    - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
+    - emulator -avd test -no-skin -no-audio -no-window &
+    - android-wait-for-emulator
+    - adb shell input keyevent 82 &
