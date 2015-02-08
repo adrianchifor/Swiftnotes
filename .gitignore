@@ -4,4 +4,7 @@
 /.idea/libraries
 .DS_Store
 /build
-*.iml
+/Swiftnotes.iml
+app/app.iml
+app/.idea
+gradle/local.properties
