@@ -5,7 +5,7 @@
 .DS_Store
 /build
 .idea/
-*.iml
-app/*.iml
+Swiftnotes.iml
+app/app.iml
 app/.idea/
 gradle/local.properties
