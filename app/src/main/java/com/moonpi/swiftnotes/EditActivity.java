@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
@@ -48,6 +49,15 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // If current Android version >= 18, set orientation fullUser
+        if (Build.VERSION.SDK_INT >= 18)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
+
+            // If current Android version < 18, set orientation fullSensor
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+
 
         setContentView(R.layout.activity_edit);
 

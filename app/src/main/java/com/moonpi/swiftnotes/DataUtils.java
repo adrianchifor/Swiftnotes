@@ -80,7 +80,11 @@ public class DataUtils {
             if (isExternalStorageReadable() && isExternalStorageWritable()) {
                 if (!toFile.exists()) {
                     try {
-                        toFile.createNewFile();
+                        Boolean created = toFile.createNewFile();
+
+                        // If file failed to create, return false
+                        if (!created)
+                            return false;
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -97,7 +101,11 @@ public class DataUtils {
         else if (toFile == MainActivity.getLocalPath()) {
             if (!toFile.exists()) {
                 try {
-                    toFile.createNewFile();
+                    Boolean created = toFile.createNewFile();
+
+                    // If file failed to create, return false
+                    if (!created)
+                        return false;
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -187,7 +195,14 @@ public class DataUtils {
 
             bReader = new BufferedReader(reader);
 
-            root = new JSONObject(bReader.readLine());
+            StringBuilder text = new StringBuilder();
+            String line;
+
+            while ((line = bReader.readLine()) != null) {
+                text.append(line);
+            }
+
+            root = new JSONObject(text.toString());
 
         } catch (IOException | JSONException e) {
             e.printStackTrace();

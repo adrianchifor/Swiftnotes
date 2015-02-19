@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -12,7 +13,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -84,6 +84,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 backupFolder.mkdir();
 
         MainActivity.backupPath = new File(backupFolder, DataUtils.BACKUP_FILE_NAME);
+
+        // If current Android version >= 18, set orientation userPortrait
+        if (Build.VERSION.SDK_INT >= 18)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT);
+
+        // If current Android version < 18, set orientation sensorPortrait
+        else
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+
 
         // Init notes array
         notes = new JSONArray();

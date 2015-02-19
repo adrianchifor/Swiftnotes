@@ -4,12 +4,12 @@
 
 This repo contains the official source code of Swiftnotes for Android.
 
-Current app version is 3.0.2.
+Current app version is 3.0.3.
 
 ### Build
 
 Steps on how to build Swiftnotes:
-- Make sure you have Android Studio, Gradle v1.0.0 and the required Android SDK Tools installed (21.1.2 Build tools)
+- Make sure you have Android Studio v1.1.0+, Gradle v1.1.0 and the required Android SDK Tools installed (21.1.2 Build tools)
 - Clone this repository
 - Open Android Studio -> File -> Import Project
 - Select build.gradle in Swiftnotes
