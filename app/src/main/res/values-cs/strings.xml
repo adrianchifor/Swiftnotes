@@ -66,8 +66,8 @@
     <string name="toast_empty_note_discarded">Prázdná poznámka zahozena</string>
     <string name="toast_cannot_delete_new_note">Poznámka ještě nebyla vytvořena</string>
     <string name="toast_edittext_cannot_be_empty">Předmět nemůže být prázdný</string>
-    <string name="toast_note_body_hidden">Poznámka tělo bude nyní se skrývá v seznamu poznámek</string>
-    <string name="toast_note_body_showing">Poznámka tělo bude nyní uveden v seznamu poznámek</string>
+    <string name="toast_note_body_hidden">Text poznámky bude skryt v seznamu poznámek</string>
+    <string name="toast_note_body_showing">Text poznámky bude zobrazen v seznamu poznámek</string>
     <string name="toast_backup_failed">Zálohování se nezdařilo</string>
     <string name="toast_backup_no_notes">Žádné poznámky k zálohování</string>
     <string name="toast_restore_successful">Poznámky obnoveny</string>
