@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Swiftnotes</string>
+    <string name="title_edit_notes_activity">Notitie</string>
+    <!-- -->
+    <string name="no_notes_text">Druk \'+\' om een notitie toe te voegen</string>
+    <string name="note_title">Titel</string>
+    <string name="note_body">Notitie</string>
+    <!-- -->
+    <string name="yes_button">Ja</string>
+    <string name="no_button">Nee</string>
+    <!-- -->
+    <string-array name="colourNames">
+        <item>Blauw</item>
+        <item>Groenblauw</item>
+        <item>Groen</item>
+        <item>Geel</item>
+        <item>Oranje</item>
+        <item>Rood</item>
+        <item>Roze</item>
+        <item>Paars</item>
+        <item>Wit</item>
+    </string-array>
+    <!-- -->
+    <string-array name="fontSizeNames">
+        <item>Klein</item>
+        <item>Gemiddeld</item>
+        <item>Groot</item>
+    </string-array>
+    <!-- -->
+    <string name="action_search">Zoek</string>
+    <string name="action_rate_app">Beoordeel app</string>
+    <string name="action_backup">Backup notities</string>
+    <string name="action_restore">Herstel notities</string>
+    <string name="action_note_colour">Notitiekleur</string>
+    <string name="action_save">Opslaan</string>
+    <string name="action_delete">Verwijderen</string>
+    <string name="action_delete_selected_number">Geselecteerd</string>
+    <string name="action_font_size">Notitie lettergrootte</string>
+    <string name="action_hide_body">Verberg notitie-inhoud in lijst</string>
+    <string name="action_show_body">Weergeef notitie-inhoud in lijst</string>
+    <!-- -->
+    <string name="dialog_delete">Geselecteerde notities worden verwijderd!</string>
+    <string name="dialog_note_colour">Verander notitiekleur</string>
+    <string name="dialog_save_changes">Wijzigingen opslaan?</string>
+    <string name="dialog_font_size">Wijzig notitie lettergrootte</string>
+    <string name="dialog_rate_title">Beoordeel app</string>
+    <string name="dialog_rate_message">Open app in Play Store?
+        (Bedankt voor het beoordelen! We waarderen uw inbreng!)</string>
+    <string name="dialog_check_backup_if_sure">Weet u zeker dat u een backup wilt maken van de huidige notities?</string>
+    <string name="dialog_backup_created_title">Backup voltooid</string>
+    <string name="dialog_backup_created">Backup gemaakt op</string>
+    <string name="dialog_check_restore_if_sure">Weet u zeker dat u de backup van notities wilt herstellen?
+        (Kan niet ongedaan worden gemaakt)</string>
+    <string name="dialog_restore_failed_title">Geen backup gevonden</string>
+    <string name="dialog_restore_failed">Om notities te herstellen, moet het backupbestand
+         in \'External/Swiftnotes/swiftnotes_backup.json\' zitten</string>
+    <!-- -->
+    <string name="new_note_content_description">Nieuwe notitie</string>
+    <string name="favourite_content_description">Favoriet</string>
+    <!-- -->
+    <string name="toast_deleted">Verwijderen voltooid</string>
+    <string name="toast_new_note">Notitie gemaakt</string>
+    <string name="toast_note_saved">Notitie opgeslagen</string>
+    <string name="toast_empty_note_discarded">Lege notitie genegeerd</string>
+    <string name="toast_cannot_delete_new_note">Notitie nog niet gemaakt</string>
+    <string name="toast_edittext_cannot_be_empty">Titel kan niet leeg zijn</string>
+    <string name="toast_note_body_hidden">Notitie-inhoud zal nu verborgen zijn in notitielijst</string>
+    <string name="toast_note_body_showing">Notitie-inhoud zal nu getoond worden in notitielijst</string>
+    <string name="toast_backup_failed">Backup mislukt</string>
+    <string name="toast_backup_no_notes">Geen notities om te backuppen</string>
+    <string name="toast_restore_successful">Notities hersteld</string>
+    <string name="toast_restore_unsuccessful">Herstellen mislukt</string>
+
+</resources>
