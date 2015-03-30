@@ -943,19 +943,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
 
     /**
-     * If current window loses focus -> hide keyboard
-     * @param hasFocus parameter passed by system; true if focus changed, false otherwise
-     */
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-
-        if (!hasFocus)
-            imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
-    }
-
-
-    /**
      * Orientation changed callback method
      * If orientation changed -> If any AlertDialog is showing, dismiss it to prevent WindowLeaks
      * @param newConfig New Configuration passed by system
