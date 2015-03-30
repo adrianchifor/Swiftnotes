@@ -7,12 +7,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static com.moonpi.swiftnotes.MainActivity.*;
 
     /*
     *   JSON file structure:
@@ -32,15 +34,14 @@ import java.util.ArrayList;
 
 public class DataUtils {
 
-    public static final String NOTES_FILE_NAME = "notes.json";
-    public static final String NOTES_ARRAY_NAME = "notes";
+    public static final String NOTES_FILE_NAME = "notes.json"; // Local notes file name
+    public static final String NOTES_ARRAY_NAME = "notes"; // Root object name
 
-    // Used for backup and restore
-    public static final String BACKUP_FOLDER_PATH = "/Swiftnotes";
-    public static final String BACKUP_FILE_NAME = "swiftnotes_backup.json";
+    public static final String BACKUP_FOLDER_PATH = "/Swiftnotes"; // Backup folder path
+    public static final String BACKUP_FILE_NAME = "swiftnotes_backup.json"; // Backup file name
 
     // Note data constants used in intents and in key-value store
-    public static final int NEW_NOTE_REQUEST = 50000;
+    public static final int NEW_NOTE_REQUEST = 60000;
     public static final String NOTE_REQUEST_CODE = "requestCode";
     public static final String NOTE_TITLE = "title";
     public static final String NOTE_BODY = "body";
@@ -61,81 +62,81 @@ public class DataUtils {
 
         JSONObject root = new JSONObject();
 
-        // If passed notes not null, wrap in root JSONObject
+        // If passed notes not null -> wrap in root JSONObject
         if (notes != null) {
             try {
                 root.put(NOTES_ARRAY_NAME, notes);
 
             } catch (JSONException e) {
                 e.printStackTrace();
+                return false;
             }
         }
 
-        // If passed notes null, return false
+        // If passed notes null -> return false
         else
             return false;
 
-        // If file is backupPath and it doesn't exist, create file
-        if (toFile == MainActivity.getBackupPath()) {
+        // If file is backup and it doesn't exist -> create file
+        if (toFile == getBackupPath()) {
             if (isExternalStorageReadable() && isExternalStorageWritable()) {
                 if (!toFile.exists()) {
                     try {
                         Boolean created = toFile.createNewFile();
 
-                        // If file failed to create, return false
+                        // If file failed to create -> return false
                         if (!created)
                             return false;
 
                     } catch (IOException e) {
                         e.printStackTrace();
+                        return false; // If file creation threw exception -> return false
                     }
                 }
             }
 
-            // If external storage not readable/writable, return false
+            // If external storage not readable/writable -> return false
             else
                 return false;
         }
 
-        // If file is localPath and it doesn't exist, create file
-        else if (toFile == MainActivity.getLocalPath()) {
-            if (!toFile.exists()) {
-                try {
-                    Boolean created = toFile.createNewFile();
+        // If file is local and it doesn't exist -> create file
+        else if (toFile == getLocalPath() && !toFile.exists()) {
+            try {
+                Boolean created = toFile.createNewFile();
 
-                    // If file failed to create, return false
-                    if (!created)
-                        return false;
+                // If file failed to create -> return false
+                if (!created)
+                    return false;
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false; // If file creation threw exception -> return false
             }
         }
 
 
-        FileWriter writer = null;
+        BufferedWriter bufferedWriter = null;
 
         try {
-            // Initialize FileWriter and write root object to file
-            writer = new FileWriter(toFile);
+            // Initialize BufferedWriter with FileWriter and write root object to file
+            bufferedWriter = new BufferedWriter(new FileWriter(toFile));
+            bufferedWriter.write(root.toString());
 
-            writer.write(root.toString());
-
-            // If we got to this stage without throwing an exception, set successful to true
+            // If we got to this stage without throwing an exception -> set successful to true
             successful = true;
 
         } catch (IOException e) {
-            // If something went wrong before, set successful to false
+            // If something went wrong in try block -> set successful to false
             successful = false;
             e.printStackTrace();
 
         } finally {
-            // Finally, if writer not null, flush and close it
-            if (writer != null) {
+            // Finally, if bufferedWriter not null -> flush and close it
+            if (bufferedWriter != null) {
                 try {
-                    writer.flush();
-                    writer.close();
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -147,7 +148,6 @@ public class DataUtils {
     }
 
 
-
     /**
      * Read from file 'fromFile' and return parsed JSONArray of notes
      * @param fromFile File we are reading from
@@ -156,49 +156,43 @@ public class DataUtils {
     public static JSONArray retrieveData(File fromFile) {
         JSONArray notes = null;
 
-        // If file is backupPath and it doesn't exist, return null
-        if (fromFile == MainActivity.getBackupPath()) {
-            if (isExternalStorageReadable()) {
-                if (!fromFile.exists()) {
-                    return null;
-                }
-            }
-        }
-
-        /*
-         * If file is localPath and it doesn't exist ->
-         * Initialize notes JSONArray as new and save into local file
-         */
-        else if (fromFile == MainActivity.getLocalPath()) {
-            if (!fromFile.exists()) {
-                notes = new JSONArray();
-
-                Boolean successfulSaveToLocal = saveData(fromFile, notes);
-
-                // If save successful, return new notes
-                if (successfulSaveToLocal) {
-                    return notes;
-                }
-
-                // Else, return null
+        // If file is backup and it doesn't exist -> return null
+        if (fromFile == getBackupPath()) {
+            if (isExternalStorageReadable() && !fromFile.exists()) {
                 return null;
             }
         }
 
+        /*
+         * If file is local and it doesn't exist ->
+         * Initialize notes JSONArray as new and save into local file
+         */
+        else if (fromFile == getLocalPath() && !fromFile.exists()) {
+            notes = new JSONArray();
+
+            Boolean successfulSaveToLocal = saveData(fromFile, notes);
+
+            // If save successful -> return new notes
+            if (successfulSaveToLocal) {
+                return notes;
+            }
+
+            // Else -> return null
+            return null;
+        }
+
 
         JSONObject root = null;
-        BufferedReader bReader = null;
+        BufferedReader bufferedReader = null;
 
         try {
-            // Initialize FileReader, read from 'fromFile' and store into root object
-            FileReader reader = new FileReader(fromFile);
-
-            bReader = new BufferedReader(reader);
+            // Initialize BufferedReader, read from 'fromFile' and store into root object
+            bufferedReader = new BufferedReader(new FileReader(fromFile));
 
             StringBuilder text = new StringBuilder();
             String line;
 
-            while ((line = bReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 text.append(line);
             }
 
@@ -208,10 +202,10 @@ public class DataUtils {
             e.printStackTrace();
 
         } finally {
-            // Finally, if reader not null, close buffer
-            if (bReader != null) {
+            // Finally, if bufferedReader not null -> close it
+            if (bufferedReader != null) {
                 try {
-                    bReader.close();
+                    bufferedReader.close();
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -219,7 +213,7 @@ public class DataUtils {
             }
         }
 
-        // If root is not null, get notes array from root object
+        // If root is not null -> get notes array from root object
         if (root != null) {
             try {
                 notes = root.getJSONArray(NOTES_ARRAY_NAME);
@@ -234,22 +228,20 @@ public class DataUtils {
     }
 
 
-
     /**
      * Create new JSONArray of notes from 'from' without the notes at positions in 'selectedNotes'
      * @param from Main notes array to delete from
-     * @param selectedNotes ArrayList of integers which represent note positions to be deleted
+     * @param selectedNotes ArrayList of Integer which represent note positions to be deleted
      * @return New JSONArray of notes without the notes at positions 'selectedNotes'
      */
     public static JSONArray deleteNotes(JSONArray from, ArrayList<Integer> selectedNotes) {
         // Init new JSONArray
         JSONArray newNotes = new JSONArray();
 
-        // Look through main notes
+        // Loop through main notes
         for (int i = 0; i < from.length(); i++) {
-            // If array of positions to delete doesn't contain current position
+            // If array of positions to delete doesn't contain current position -> put in new array
             if (!selectedNotes.contains(i)) {
-                // Put into new array
                 try {
                     newNotes.put(from.get(i));
 
@@ -264,15 +256,12 @@ public class DataUtils {
     }
 
 
-
     /**
      * Check if external storage is writable or not
      * @return true if writable, false otherwise
      */
     public static boolean isExternalStorageWritable() {
-        String state = Environment.getExternalStorageState();
-
-        return Environment.MEDIA_MOUNTED.equals(state);
+        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
 
     /**

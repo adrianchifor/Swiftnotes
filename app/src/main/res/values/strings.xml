@@ -34,7 +34,6 @@
     <string name="action_backup">Backup notes</string>
     <string name="action_restore">Restore notes</string>
     <string name="action_note_colour">Note colour</string>
-    <string name="action_save">Save</string>
     <string name="action_delete">Delete</string>
     <string name="action_delete_selected_number">Selected</string>
     <string name="action_font_size">Note font size</string>
@@ -64,7 +63,6 @@
     <string name="toast_new_note">Note created</string>
     <string name="toast_note_saved">Note saved</string>
     <string name="toast_empty_note_discarded">Empty note discarded</string>
-    <string name="toast_cannot_delete_new_note">Note not created yet</string>
     <string name="toast_edittext_cannot_be_empty">Title cannot be empty</string>
     <string name="toast_note_body_hidden">Note body will now be hidden in notes list</string>
     <string name="toast_note_body_showing">Note body will now be shown in notes list</string>

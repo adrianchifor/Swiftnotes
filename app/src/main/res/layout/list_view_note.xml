@@ -14,43 +14,43 @@
         android:layout_height="wrap_content"
         android:text="@string/note_title"
         android:id="@+id/titleView"
+        android:layout_toLeftOf="@+id/favourite"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:textStyle="bold"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:maxLines="1"
-        android:layout_toLeftOf="@+id/favourite"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="8dp"
+        android:textStyle="bold"
         android:textSize="25sp"
-        android:textColor="@color/black_95" />
+        android:maxLines="1"
+        android:textColor="@color/black_95"
+        android:paddingBottom="8dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/note_body"
         android:id="@+id/bodyView"
         android:layout_below="@+id/titleView"
         android:layout_alignLeft="@+id/titleView"
         android:layout_alignStart="@+id/titleView"
-        android:layout_marginTop="5dp"
-        android:paddingBottom="8dp"
-        android:maxLines="5"
         android:layout_alignRight="@+id/titleView"
         android:layout_alignEnd="@+id/titleView"
-        android:textColor="@color/black_95" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:maxLines="5"
+        android:textColor="@color/black_95"
+        android:paddingBottom="8dp" />
 
     <ImageButton
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:id="@+id/favourite"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="10dp"
         android:layout_centerVertical="true"
         android:background="@color/transparent"
+        android:contentDescription="@string/favourite_content_description"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_unfav"
-        android:contentDescription="@string/favourite_content_description" />
+        android:src="@drawable/ic_unfav" />
 
 </RelativeLayout>

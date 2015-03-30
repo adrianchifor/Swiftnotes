@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <!-- 2dp Shadow -->
     <item>
-        <shape android:shape="rectangle">
+        <shape android:shape="rectangle" >
             <solid android:color="@color/black_05" />
             <corners android:radius="4dp" />
         </shape>
     </item>
 
-    <item android:id="@+id/card" android:bottom="2dp">
-        <shape android:shape="rectangle">
+    <item android:id="@+id/card" android:bottom="2dp" >
+        <shape android:shape="rectangle" >
             <solid android:color="@color/white" />
             <corners android:radius="4dp" />
         </shape>

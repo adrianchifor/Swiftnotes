@@ -9,7 +9,7 @@
     android:background="@color/background_white" >
 
     <include
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarMain"
         layout="@layout/toolbar"/>
 
     <ListView
@@ -27,7 +27,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/toolbarMain"
         android:paddingTop="8dp"
         android:paddingBottom="8dp" />
 
@@ -60,5 +60,13 @@
         android:layout_marginRight="8dp"
         android:layout_centerInParent="true"
         android:visibility="invisible" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/shadow_elevation"
+        android:layout_below="@+id/toolbarMain"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/drop_shadow" />
 
 </RelativeLayout>

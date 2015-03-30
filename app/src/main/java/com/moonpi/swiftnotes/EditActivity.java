@@ -14,11 +14,18 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
+
+import com.moonpi.swiftnotes.ColorPicker.ColorPickerDialog;
+
+import static com.moonpi.swiftnotes.ColorPicker.ColorPickerSwatch.*;
+import static com.moonpi.swiftnotes.DataUtils.*;
 
 
 public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuItemClickListener {
@@ -30,76 +37,96 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
     private MenuItem menuHideBody;
 
     private InputMethodManager imm;
-
     private Bundle bundle;
 
-    private String [] colourArr; // Colours string array
-    private String [] colourNameArr; // Colour names string array
-    private int [] fontSizeArr; // Font sizes int array
-    private String [] fontSizeNameArr; // Font size names string array
+    private String[] colourArr; // Colours string array
+    private int[] colourArrResId; // colourArr to resource int array
+    private int[] fontSizeArr; // Font sizes int array
+    private String[] fontSizeNameArr; // Font size names string array
 
     // Defaults
     private String colour = "#FFFFFF"; // white default
     private int fontSize = 18; // Medium default
     private Boolean hideBody = false;
 
-    private AlertDialog colourDialog, fontDialog, saveChangesDialog;
+    private AlertDialog fontDialog, saveChangesDialog;
+    private ColorPickerDialog colorPickerDialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // If current Android version >= 18, set orientation fullUser
+        // Android version >= 18 -> set orientation fullUser
         if (Build.VERSION.SDK_INT >= 18)
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_USER);
 
-            // If current Android version < 18, set orientation fullSensor
+        // Android version < 18 -> set orientation fullSensor
         else
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
+        // Initialize colours and font sizes arrays
+        colourArr = getResources().getStringArray(R.array.colours);
+
+        colourArrResId = new int[colourArr.length];
+        for (int i = 0; i < colourArr.length; i++)
+            colourArrResId[i] = Color.parseColor(colourArr[i]);
+
+        fontSizeArr = new int[] {14, 18, 22}; // 0 for small, 1 for medium, 2 for large
+        fontSizeNameArr = getResources().getStringArray(R.array.fontSizeNames);
 
         setContentView(R.layout.activity_edit);
 
-        // Init toolbar
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        // Init layout components
+        toolbar = (Toolbar)findViewById(R.id.toolbarEdit);
+        titleEdit = (EditText)findViewById(R.id.titleEdit);
+        bodyEdit = (EditText)findViewById(R.id.bodyEdit);
+        relativeLayoutEdit = (RelativeLayout)findViewById(R.id.relativeLayoutEdit);
+        ScrollView scrollView = (ScrollView)findViewById(R.id.scrollView);
+
+        imm = (InputMethodManager) this.getSystemService(INPUT_METHOD_SERVICE);
 
         if (toolbar != null)
             initToolbar();
 
-        // Init layout components
-        titleEdit = (EditText)findViewById(R.id.titleEdit);
-        bodyEdit = (EditText)findViewById(R.id.bodyEdit);
-        relativeLayoutEdit = (RelativeLayout)findViewById(R.id.relativeLayoutEdit);
-        imm = (InputMethodManager) this.getSystemService(INPUT_METHOD_SERVICE);
+        // If scrollView touched and note body doesn't have focus -> request focus and go to body end
+        scrollView.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (!bodyEdit.isFocused()) {
+                    bodyEdit.requestFocus();
+                    bodyEdit.setSelection(bodyEdit.getText().length());
+                    // Force show keyboard
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,
+                            InputMethodManager.HIDE_IMPLICIT_ONLY);
 
-        // Initialize colours and font sizes arrays
-        colourArr = this.getResources().getStringArray(R.array.colours);
-        colourNameArr = this.getResources().getStringArray(R.array.colourNames);
+                    return true;
+                }
 
-        fontSizeArr = new int[] {14, 18, 22}; // 0 for small, 1 for medium, 2 for large
-        fontSizeNameArr = this.getResources().getStringArray(R.array.fontSizeNames);
+                return false;
+            }
+        });
 
         // Get data bundle from MainActivity
         bundle = getIntent().getExtras();
 
         if (bundle != null) {
-            // If current note is not new, initialize colour, font, hideBody and EditTexts
-            if (bundle.getInt(DataUtils.NOTE_REQUEST_CODE) != DataUtils.NEW_NOTE_REQUEST) {
-                colour = bundle.getString(DataUtils.NOTE_COLOUR);
-                fontSize = bundle.getInt(DataUtils.NOTE_FONT_SIZE);
-                hideBody = bundle.getBoolean(DataUtils.NOTE_HIDE_BODY);
+            // If current note is not new -> initialize colour, font, hideBody and EditTexts
+            if (bundle.getInt(NOTE_REQUEST_CODE) != NEW_NOTE_REQUEST) {
+                colour = bundle.getString(NOTE_COLOUR);
+                fontSize = bundle.getInt(NOTE_FONT_SIZE);
+                hideBody = bundle.getBoolean(NOTE_HIDE_BODY);
 
-                titleEdit.setText(bundle.getString(DataUtils.NOTE_TITLE));
-                bodyEdit.setText(bundle.getString(DataUtils.NOTE_BODY));
+                titleEdit.setText(bundle.getString(NOTE_TITLE));
+                bodyEdit.setText(bundle.getString(NOTE_BODY));
                 bodyEdit.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
 
                 if (hideBody)
-                    menuHideBody.setTitle(getResources().getString(R.string.action_show_body));
+                    menuHideBody.setTitle(R.string.action_show_body);
             }
 
-            // If current note is new, request keyboard focus to Title
-            if (bundle.getInt(DataUtils.NOTE_REQUEST_CODE) == DataUtils.NEW_NOTE_REQUEST) {
+            // If current note is new -> request keyboard focus to note title and show keyboard
+            else if (bundle.getInt(NOTE_REQUEST_CODE) == NEW_NOTE_REQUEST) {
                 titleEdit.requestFocus();
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
             }
@@ -114,10 +141,10 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
 
     /**
      * Initialize toolbar with required components such as
-     * - navigation icon + listener, title, elevation (21+), menu/OnMenuItemClickListener, menuHideBody -
+     * - title, navigation icon + listener, menu/OnMenuItemClickListener, menuHideBody -
      */
     protected void initToolbar() {
-        toolbar.bringToFront();
+        toolbar.setTitle("");
 
         // Set a 'Back' navigation icon in the Toolbar and handle the click
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
@@ -128,16 +155,11 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
             }
         });
 
-        toolbar.setTitle("");
-
-        if (Build.VERSION.SDK_INT >= 21)
-            toolbar.setElevation(10.0f);
+        // Inflate menu_edit to be displayed in the toolbar
+        toolbar.inflateMenu(R.menu.menu_edit);
 
         // Set an OnMenuItemClickListener to handle menu item clicks
         toolbar.setOnMenuItemClickListener(this);
-
-        // Inflate a menu to be displayed in the toolbar
-        toolbar.inflateMenu(R.menu.edit);
 
         Menu menu = toolbar.getMenu();
 
@@ -148,35 +170,38 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
 
     /**
      * Implementation of AlertDialogs such as
-     * - colourDialog, fontDialog, saveChangesDialog -
+     * - colorPickerDialog, fontDialog and saveChangesDialog -
      * @param context The Activity context of the dialogs; in this case EditActivity context
      */
     protected void initDialogs(Context context) {
         // Colour picker dialog
-        colourDialog = new AlertDialog.Builder(context)
-                .setTitle(getResources().getString(R.string.dialog_note_colour))
-                .setItems(colourNameArr, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Colour is updated with new pick
-                        colour = colourArr[which];
+        colorPickerDialog = ColorPickerDialog.newInstance(R.string.dialog_note_colour,
+                colourArrResId,
+                Color.parseColor(colour),
+                3,
+                isTablet(this) ? ColorPickerDialog.SIZE_LARGE : ColorPickerDialog.SIZE_SMALL);
 
-                        // Background colour is changed
-                        relativeLayoutEdit.setBackgroundColor(Color.parseColor(colour));
-                    }
-                })
-                .setNeutralButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .create();
+        // Colour picker listener in colour picker dialog
+        colorPickerDialog.setOnColorSelectedListener(new OnColorSelectedListener() {
+            @Override
+            public void onColorSelected(int color) {
+                // Format selected colour to string
+                String selectedColourAsString = String.format("#%06X", (0xFFFFFF & color));
+
+                // Check which colour is it and equal to main colour
+                for (String aColour : colourArr)
+                    if (aColour.equals(selectedColourAsString))
+                        colour = aColour;
+
+                // Re-set background colour
+                relativeLayoutEdit.setBackgroundColor(Color.parseColor(colour));
+            }
+        });
 
 
         // Font size picker dialog
         fontDialog = new AlertDialog.Builder(context)
-                .setTitle(getResources().getString(R.string.dialog_font_size))
+                .setTitle(R.string.dialog_font_size)
                 .setItems(fontSizeNameArr, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -198,12 +223,12 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
 
         // 'Save changes?' dialog
         saveChangesDialog = new AlertDialog.Builder(context)
-                .setMessage(getResources().getString(R.string.dialog_save_changes))
-                .setPositiveButton(getResources().getString(R.string.yes_button), new DialogInterface.OnClickListener() {
+                .setMessage(R.string.dialog_save_changes)
+                .setPositiveButton(R.string.yes_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // If 'Yes' clicked, check if title is empty
-                        // If title not empty, save and go back; Toast otherwise
+                        // If 'Yes' clicked -> check if title is empty
+                        // If title not empty -> save and go back; Otherwise toast
                         if (!isEmpty(titleEdit))
                             saveChanges();
 
@@ -211,42 +236,39 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
                             toastEditTextCannotBeEmpty();
                     }
                 })
-                .setNegativeButton(getResources().getString(R.string.no_button), new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // If 'No' clicked
-                        if (bundle != null) {
-                            // If new note -> put extra 'discard' to show toast
-                            if (bundle.getInt(DataUtils.NOTE_REQUEST_CODE) == DataUtils.NEW_NOTE_REQUEST) {
-                                Intent intent = new Intent();
+                        // If 'No' clicked in new note -> put extra 'discard' to show toast
+                        if (bundle != null && bundle.getInt(NOTE_REQUEST_CODE) ==
+                                NEW_NOTE_REQUEST) {
 
-                                intent.putExtra("request", "discard");
+                            Intent intent = new Intent();
+                            intent.putExtra("request", "discard");
 
-                                setResult(RESULT_CANCELED, intent);
+                            setResult(RESULT_CANCELED, intent);
 
-                                imm.hideSoftInputFromWindow(titleEdit.getWindowToken(), 0);
+                            imm.hideSoftInputFromWindow(titleEdit.getWindowToken(), 0);
 
-                                dialog.dismiss();
-                                finish();
-                                overridePendingTransition(0, 0);
-                            }
-
-                            // If note is not new -> hide keyboard if showing and finish
-                            else {
-                                setResult(RESULT_CANCELED);
-
-                                imm.hideSoftInputFromWindow(titleEdit.getWindowToken(), 0);
-
-                                dialog.dismiss();
-                                finish();
-                                overridePendingTransition(0, 0);
-                            }
+                            dialog.dismiss();
+                            finish();
+                            overridePendingTransition(0, 0);
                         }
                     }
                 })
                 .create();
     }
 
+
+    /**
+     * Check if current device has tablet screen size or not
+     * @param context current application context
+     * @return true if device is tablet, false otherwise
+     */
+    public static boolean isTablet(Context context) {
+        return (context.getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    }
 
 
     /**
@@ -258,54 +280,41 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
     public boolean onMenuItemClick(MenuItem item) {
         int id = item.getItemId();
 
+        // Note colour menu item clicked -> show colour picker dialog
         if (id == R.id.action_note_colour) {
-            // User picks colour from array
-            colourDialog.show();
-
+            colorPickerDialog.show(getFragmentManager(), "colourPicker");
             return true;
         }
 
-        if (id == R.id.action_save) {
-            // If note title is not empty, save and finish; Else toast
-            if (!isEmpty(titleEdit))
-                saveChanges();
-
-            else
-                toastEditTextCannotBeEmpty();
-
-            return true;
-        }
-
+        // Font size menu item clicked -> show font picker dialog
         if (id == R.id.action_font_size) {
-            // User picks font size from array
             fontDialog.show();
-
             return true;
         }
 
         // If 'Hide note body in list' or 'Show note body in list' clicked
         if (id == R.id.action_hide_show_body) {
-            // If not true -> set to true and change menu item text to 'Show note body in list'
+            // If hideBody false -> set to true and change menu item text to 'Show note body in list'
             if (!hideBody) {
                 hideBody = true;
-                menuHideBody.setTitle(getResources().getString(R.string.action_show_body));
+                menuHideBody.setTitle(R.string.action_show_body);
 
                 // Toast note body will be hidden
                 Toast toast = Toast.makeText(getApplicationContext(),
                         getResources().getString(R.string.toast_note_body_hidden),
-                        Toast.LENGTH_LONG);
+                        Toast.LENGTH_SHORT);
                 toast.show();
             }
 
             // If hideBody true -> set to false and change menu item text to 'Hide note body in list'
             else {
                 hideBody = false;
-                menuHideBody.setTitle(getResources().getString(R.string.action_hide_body));
+                menuHideBody.setTitle(R.string.action_hide_body);
 
                 // Toast note body will be shown
                 Toast toast = Toast.makeText(getApplicationContext(),
                         getResources().getString(R.string.toast_note_body_showing),
-                        Toast.LENGTH_LONG);
+                        Toast.LENGTH_SHORT);
                 toast.show();
             }
 
@@ -316,7 +325,6 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
     }
 
 
-
     /**
      * Create an Intent with title, body, colour, font size and hideBody extras
      * Set RESULT_OK and go back to MainActivity
@@ -325,11 +333,11 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
         Intent intent = new Intent();
 
         // Package everything and send back to activity with OK
-        intent.putExtra(DataUtils.NOTE_TITLE, titleEdit.getText().toString());
-        intent.putExtra(DataUtils.NOTE_BODY, bodyEdit.getText().toString());
-        intent.putExtra(DataUtils.NOTE_COLOUR, colour);
-        intent.putExtra(DataUtils.NOTE_FONT_SIZE, fontSize);
-        intent.putExtra(DataUtils.NOTE_HIDE_BODY, hideBody);
+        intent.putExtra(NOTE_TITLE, titleEdit.getText().toString());
+        intent.putExtra(NOTE_BODY, bodyEdit.getText().toString());
+        intent.putExtra(NOTE_COLOUR, colour);
+        intent.putExtra(NOTE_FONT_SIZE, fontSize);
+        intent.putExtra(NOTE_HIDE_BODY, hideBody);
 
         setResult(RESULT_OK, intent);
 
@@ -342,48 +350,53 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
 
     /**
      * Back or navigation '<-' pressed
-     * Check if note new or existing
-     *    If new -> Show 'Save changes?' dialog
-     *    If existing -> Check for changes
-     *        If changed -> Show 'Save changes?' dialog
-     *        It not -> Finish
      */
     @Override
     public void onBackPressed() {
-        // If new note, show 'Save changes?' dialog
-        if (bundle.getInt(DataUtils.NOTE_REQUEST_CODE) == DataUtils.NEW_NOTE_REQUEST)
+        // New note -> show 'Save changes?' dialog
+        if (bundle.getInt(NOTE_REQUEST_CODE) == NEW_NOTE_REQUEST)
             saveChangesDialog.show();
 
-        // If existing note, check if it changed and show 'Save changes?' dialog; finish otherwise
+        // Existing note
         else {
-            if (!(titleEdit.getText().toString().equals(bundle.getString(DataUtils.NOTE_TITLE))) ||
-                !(bodyEdit.getText().toString().equals(bundle.getString(DataUtils.NOTE_BODY))) ||
-                !(colour.equals(bundle.getString(DataUtils.NOTE_COLOUR))) ||
-                fontSize != bundle.getInt(DataUtils.NOTE_FONT_SIZE) ||
-                hideBody != bundle.getBoolean(DataUtils.NOTE_HIDE_BODY)) {
+            /*
+             * If title is not empty -> Check if note changed
+             *  If yes -> saveChanges
+             *  If not -> hide keyboard if showing and finish
+             */
+            if (!isEmpty(titleEdit)) {
+                if (!(titleEdit.getText().toString().equals(bundle.getString(NOTE_TITLE))) ||
+                    !(bodyEdit.getText().toString().equals(bundle.getString(NOTE_BODY))) ||
+                    !(colour.equals(bundle.getString(NOTE_COLOUR))) ||
+                    fontSize != bundle.getInt(NOTE_FONT_SIZE) ||
+                    hideBody != bundle.getBoolean(NOTE_HIDE_BODY)) {
 
-                saveChangesDialog.show();
+                    saveChanges();
+                }
+
+                else {
+                    imm.hideSoftInputFromWindow(titleEdit.getWindowToken(), 0);
+
+                    finish();
+                    overridePendingTransition(0, 0);
+                }
             }
 
-            else {
-                imm.hideSoftInputFromWindow(titleEdit.getWindowToken(), 0);
-
-                finish();
-                overridePendingTransition(0, 0);
-            }
+            // If title empty -> Toast title cannot be empty
+            else
+                toastEditTextCannotBeEmpty();
         }
     }
 
 
     /**
-     * Check whether passed EditText text is empty or not
+     * Check if passed EditText text is empty or not
      * @param editText The EditText widget to check
      * @return true if empty, false otherwise
      */
     protected boolean isEmpty(EditText editText) {
         return editText.getText().toString().trim().length() == 0;
     }
-
 
     /**
      * Show Toast for 'Title cannot be empty'
@@ -396,29 +409,28 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
     }
 
 
-
     /**
-     * If current window loses focus, hide keyboard
-     * @param hasFocus Parameter passed by system; true if focus changed, false otherwise
+     * If current window loses focus -> hide keyboard
+     * @param hasFocus parameter passed by system; true if focus changed, false otherwise
      */
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
-        if (!hasFocus)
+        if (!hasFocus && !titleEdit.isFocused() && !bodyEdit.isFocused())
             imm.hideSoftInputFromWindow(titleEdit.getWindowToken(), 0);
     }
 
 
     /**
      * Orientation changed callback method
-     * If orientation changed -> If any AlertDialog is showing, dismiss it to prevent WindowLeaks
-     * @param newConfig New Configuration passed by system
+     * If orientation changed -> If any AlertDialog is showing -> dismiss it to prevent WindowLeaks
+     * @param newConfig Configuration passed by system
      */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        if (colourDialog.isShowing())
-            colourDialog.dismiss();
+        if (colorPickerDialog.isVisible())
+            colorPickerDialog.dismiss();
 
         if (fontDialog.isShowing())
             fontDialog.dismiss();

@@ -6,7 +6,7 @@
         <item name="colorPrimaryDark">@color/theme_secondary</item>
         <item name="colorAccent">@color/theme_primary</item>
         <item name="colorControlNormal">@color/white</item>
-        <item name="colorControlActivated">@color/theme_primary</item>
+        <item name="colorControlActivated">@color/theme_secondary</item>
         <item name="colorControlHighlight">@color/theme_secondary</item>
         <item name="colorButtonNormal">@color/theme_primary</item>
         <item name="windowActionModeOverlay">true</item>
@@ -14,7 +14,7 @@
         <item name="actionModeStyle">@style/ActionModeStyle</item>
         <item name="actionMenuTextColor">@color/white</item>
     </style>
-    <!-- -->
+
     <style name="ActionModeStyle" parent="Widget.AppCompat.ActionMode">
         <item name="background">@color/theme_primary</item>
     </style>

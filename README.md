@@ -1,15 +1,17 @@
-# Swiftnotes [![Build Status](https://travis-ci.org/adrianchifor/Swiftnotes.svg)](https://travis-ci.org/adrianchifor/Swiftnotes)
+# Swiftnotes [![Build Status](https://travis-ci.org/adrianchifor/Swiftnotes.svg)](https://travis-ci.org/adrianchifor/Swiftnotes) [![Maintainer](https://img.shields.io/badge/maintainer-adrianchifor-brightgreen.svg)](https://img.shields.io/badge/maintainer-adrianchifor-brightgreen.svg)
 
-[Swiftnotes](https://play.google.com/store/apps/details?id=com.moonpi.swiftnotes) is a note taking app that takes simplicity and speed to a whole new level. It offers you a quick and easy way to stay organised, capture your thoughts, reminders or anything that's on your mind, any time, anywhere. No extra unnecessary features, just notes. For screenshots and more information visit the [Google PlayStore.](https://play.google.com/store/apps/details?id=com.moonpi.swiftnotes)
+[Swiftnotes](https://play.google.com/store/apps/details?id=com.moonpi.swiftnotes) is a note taking app that takes simplicity and speed to a whole new level. 
+
+It offers you a quick and easy way to stay organised, capture your thoughts, reminders or anything that's on your mind, any time, anywhere. No extra unnecessary features, just notes. For screenshots and more information visit the [Google PlayStore.](https://play.google.com/store/apps/details?id=com.moonpi.swiftnotes)
 
 This repo contains the official source code of Swiftnotes for Android.
 
-Current app version is 3.0.3.
+Current app version is 3.1.0.
 
 ### Build
 
 Steps on how to build Swiftnotes:
-- Make sure you have Android Studio v1.1.0+, Gradle v1.1.0 and the required Android SDK Tools installed (21.1.2 Build tools)
+- Make sure you have the latest version of Android Studio with Gradle v1.1.0 and the required Android SDK Tools installed (22.0.1 Build tools)
 - Clone this repository
 - Open Android Studio -> File -> Import Project
 - Select build.gradle in Swiftnotes

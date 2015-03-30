@@ -34,7 +34,6 @@
     <string name="action_backup">Backup notities</string>
     <string name="action_restore">Herstel notities</string>
     <string name="action_note_colour">Notitiekleur</string>
-    <string name="action_save">Opslaan</string>
     <string name="action_delete">Verwijderen</string>
     <string name="action_delete_selected_number">Geselecteerd</string>
     <string name="action_font_size">Notitie lettergrootte</string>
@@ -64,7 +63,6 @@
     <string name="toast_new_note">Notitie gemaakt</string>
     <string name="toast_note_saved">Notitie opgeslagen</string>
     <string name="toast_empty_note_discarded">Lege notitie genegeerd</string>
-    <string name="toast_cannot_delete_new_note">Notitie nog niet gemaakt</string>
     <string name="toast_edittext_cannot_be_empty">Titel kan niet leeg zijn</string>
     <string name="toast_note_body_hidden">Notitie-inhoud zal nu verborgen zijn in notitielijst</string>
     <string name="toast_note_body_showing">Notitie-inhoud zal nu getoond worden in notitielijst</string>

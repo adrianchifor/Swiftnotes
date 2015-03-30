@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/color_picker_swatch" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/color_picker_checkmark"
+        android:src="@drawable/ic_colorpicker_swatch_selected"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+
+</merge>

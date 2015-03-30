@@ -3,10 +3,11 @@
 
     <color name="theme_primary">#CE0A31</color>
     <color name="theme_secondary">#FFB00A31</color>
-    <!-- -->
+
+    <color name="drop_shadow_grey">#87737373</color>
     <color name="background_white">#FFE6E6E6</color>
     <color name="transparent">#00FFFFFF</color>
-    <!-- -->
+
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="black_95">#F2000000</color>
@@ -28,16 +29,16 @@
     <color name="black_15">#26000000</color>
     <color name="black_10">#1A000000</color>
     <color name="black_05">#0E000000</color>
-    <!-- -->
+
     <string-array name="colours" translatable="false">
         <item>#44A1EB</item> <!-- blue -->
         <item>#77DDBB</item> <!-- teal -->
         <item>#BBE535</item> <!-- green -->
-        <item>#EEEE22</item> <!-- yellow -->
-        <item>#FFBB22</item> <!-- orange -->
         <item>#F56545</item> <!-- red -->
-        <item>#FFFF5997</item> <!-- pink -->
-        <item>#FFA767FF</item> <!-- purple -->
+        <item>#FFBB22</item> <!-- orange -->
+        <item>#EEEE22</item> <!-- yellow -->
+        <item>#FF5997</item> <!-- pink -->
+        <item>#A767FF</item> <!-- purple -->
         <item>#FFFFFF</item> <!-- white -->
     </string-array>
 

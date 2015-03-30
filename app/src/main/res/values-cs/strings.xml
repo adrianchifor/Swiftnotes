@@ -34,7 +34,6 @@
     <string name="action_backup">Zálohovat poznámky</string>
     <string name="action_restore">Obnovit poznámky</string>
     <string name="action_note_colour">Barva poznámky</string>
-    <string name="action_save">Uložit</string>
     <string name="action_delete">Smazat</string>
     <string name="action_delete_selected_number">Vybraný</string>
     <string name="action_font_size">Velikost písma poznámky</string>
@@ -64,7 +63,6 @@
     <string name="toast_new_note">Poznámka vytvořena</string>
     <string name="toast_note_saved">Poznámka uložena</string>
     <string name="toast_empty_note_discarded">Prázdná poznámka zahozena</string>
-    <string name="toast_cannot_delete_new_note">Poznámka ještě nebyla vytvořena</string>
     <string name="toast_edittext_cannot_be_empty">Předmět nemůže být prázdný</string>
     <string name="toast_note_body_hidden">Text poznámky bude skryt v seznamu poznámek</string>
     <string name="toast_note_body_showing">Text poznámky bude zobrazen v seznamu poznámek</string>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".EditActivity" >
@@ -9,12 +10,6 @@
         android:orderInCategory="100"
         android:icon="@drawable/ic_note_colour"
         app:showAsAction="ifRoom" />
-
-    <item android:id="@+id/action_save"
-        android:title="@string/action_save"
-        android:orderInCategory="101"
-        android:icon="@drawable/ic_save"
-        app:showAsAction="always" />
 
     <item android:id="@+id/action_font_size"
         android:title="@string/action_font_size"

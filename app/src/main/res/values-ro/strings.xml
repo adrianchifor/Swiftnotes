@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Swiftnotes</string>
+    <string name="title_edit_notes_activity">Notita</string>
+    <!-- -->
+    <string name="no_notes_text">Apasa \'+\' pentru a crea o notita noua</string>
+    <string name="note_title">Titlu</string>
+    <string name="note_body">Notita</string>
+    <!-- -->
+    <string name="yes_button">Da</string>
+    <string name="no_button">Nu</string>
+    <!-- -->
+    <string-array name="colourNames">
+        <item>Albastru</item>
+        <item>Turcoaz</item>
+        <item>Verde</item>
+        <item>Galben</item>
+        <item>Portocaliu</item>
+        <item>Rosu</item>
+        <item>Roz</item>
+        <item>Violet</item>
+        <item>Alb</item>
+    </string-array>
+    <!-- -->
+    <string-array name="fontSizeNames">
+        <item>Mic</item>
+        <item>Mediu</item>
+        <item>Mare</item>
+    </string-array>
+    <!-- -->
+    <string name="action_search">Cauta</string>
+    <string name="action_rate_app">Evalueaza aplicatie</string>
+    <string name="action_backup">Rezerva notite</string>
+    <string name="action_restore">Restaureaza notite</string>
+    <string name="action_note_colour">Culoare notita</string>
+    <string name="action_delete">Sterge</string>
+    <string name="action_delete_selected_number">Selectate</string>
+    <string name="action_font_size">Marime font notita</string>
+    <string name="action_hide_body">Ascunde corpul notitei in lista</string>
+    <string name="action_show_body">Arata corpul notitei in lista</string>
+    <!-- -->
+    <string name="dialog_delete">Notitele selectate vor fi sterse!</string>
+    <string name="dialog_note_colour">Schimba culoarea notitei</string>
+    <string name="dialog_save_changes">Salveaza schimbari?</string>
+    <string name="dialog_font_size">Schimba marimea fontului notitei</string>
+    <string name="dialog_rate_title">Evalueaza aplicatia</string>
+    <string name="dialog_rate_message">Deschide aplicatia in Play Store?
+        (Multumim pentru evaluare!)</string>
+    <string name="dialog_check_backup_if_sure">Sunteti sigur ca vreti sa rezervati notitele curente?</string>
+    <string name="dialog_backup_created_title">Rezerva creata cu succes</string>
+    <string name="dialog_backup_created">Rezerva creata in</string>
+    <string name="dialog_check_restore_if_sure">Sunteti sigur ca vreti sa restaurati notitele rezervate?
+        (Nu se poate anula)</string>
+    <string name="dialog_restore_failed_title">Rezerva nu a fost gasita</string>
+    <string name="dialog_restore_failed">Pentru a restaura notitele, fisierul de rezerva trebuie
+        sa fie in \'External/Swiftnotes/swiftnotes_backup.json\'</string>
+    <!-- -->
+    <string name="new_note_content_description">Notita noua</string>
+    <string name="favourite_content_description">Favorit</string>
+    <!-- -->
+    <string name="toast_deleted">Stergere efectuata cu succes</string>
+    <string name="toast_new_note">Notita creata cu succes</string>
+    <string name="toast_note_saved">Notita salvata cu succes</string>
+    <string name="toast_empty_note_discarded">Notita goala anulata</string>
+    <string name="toast_edittext_cannot_be_empty">Titlul notitei nu poate fi gol</string>
+    <string name="toast_note_body_hidden">Corpul notitei va fi ascuns in lista</string>
+    <string name="toast_note_body_showing">Corpul notitei va fi vizibil in lista</string>
+    <string name="toast_backup_failed">Rezervarea notitelor a fost nereusita</string>
+    <string name="toast_backup_no_notes">Nu exista notite de rezervat</string>
+    <string name="toast_restore_successful">Notite restaurate cu succes</string>
+    <string name="toast_restore_unsuccessful">Restaurarea notitelor a fost nereusita</string>
+
+</resources>

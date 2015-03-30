@@ -34,7 +34,6 @@
     <string name="action_backup">Notizen sichern</string>
     <string name="action_restore">Notizen wiederherstellen</string>
     <string name="action_note_colour">Farbe der Notiz</string>
-    <string name="action_save">Speichern</string>
     <string name="action_delete">Löschen</string>
     <string name="action_delete_selected_number">Ausgewählt</string>
     <string name="action_font_size">Schriftgröße der Notiz</string>
@@ -64,7 +63,6 @@
     <string name="toast_new_note">Notiz erstellt</string>
     <string name="toast_note_saved">Notiz gespeichert</string>
     <string name="toast_empty_note_discarded">Leere Notiz verworfen</string>
-    <string name="toast_cannot_delete_new_note">Notiz nicht erstellt</string>
     <string name="toast_edittext_cannot_be_empty">Der Titel kann nicht leer sein</string>
     <string name="toast_note_body_hidden">Hinweis Körper wird nun Notizen Liste ausgeblendet werden</string>
     <string name="toast_note_body_showing">Textkörper der Notiz wird jetzt angezeigt in Notizen</string>
