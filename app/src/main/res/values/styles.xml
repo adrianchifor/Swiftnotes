@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="colorPrimary">@color/theme_primary</item>
         <item name="colorPrimaryDark">@color/theme_secondary</item>
         <item name="colorAccent">@color/theme_primary</item>
@@ -15,7 +15,7 @@
         <item name="actionMenuTextColor">@color/white</item>
     </style>
 
-    <style name="ActionModeStyle" parent="Widget.AppCompat.ActionMode">
+    <style name="ActionModeStyle" parent="Widget.AppCompat.ActionMode" >
         <item name="background">@color/theme_primary</item>
     </style>
 

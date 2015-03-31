@@ -6,7 +6,7 @@ It offers you a quick and easy way to stay organised, capture your thoughts, rem
 
 This repo contains the official source code of Swiftnotes for Android.
 
-Current app version is 3.1.1.
+Current app version is 3.1.2.
 
 ### Build
 

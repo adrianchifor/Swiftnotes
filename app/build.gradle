@@ -8,8 +8,8 @@ android {
         applicationId 'com.moonpi.swiftnotes'
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 8
-        versionName '3.1.1'
+        versionCode 9
+        versionName '3.1.2'
     }
 
     buildTypes {
@@ -27,4 +27,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:support-v4:22.0.0'
 }

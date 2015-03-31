@@ -18,7 +18,6 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -47,7 +46,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     private ImageButton newNote;
     private TextView noNotes;
     private Toolbar toolbar;
-    private SearchView searchView;
+    private MenuItem searchMenu;
 
     private static JSONArray notes; // Main notes array
     private static NoteAdapter adapter; // Custom ListView notes adapter
@@ -64,7 +63,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     private float newNoteButtonBaseYCoordinate; // Base Y coordinate of newNote button
 
     private AlertDialog backupCheckDialog, backupOKDialog, restoreCheckDialog, restoreFailedDialog;
-    private InputMethodManager imm;
 
 
     @Override
@@ -107,8 +105,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         listView = (ListView)findViewById(R.id.listView);
         newNote = (ImageButton)findViewById(R.id.newNote);
         noNotes = (TextView)findViewById(R.id.noNotes);
-
-        imm = (InputMethodManager) this.getSystemService(INPUT_METHOD_SERVICE);
 
         if (toolbar != null)
             initToolbar();
@@ -191,18 +187,22 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
         if (menu != null) {
             // Get 'Search' menu item
-            MenuItem searchMenu = menu.findItem(R.id.action_search);
+            searchMenu = menu.findItem(R.id.action_search);
 
             if (searchMenu != null) {
                 // If the item menu not null -> get it's support action view
-                searchView = (SearchView) MenuItemCompat.getActionView(searchMenu);
+                SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchMenu);
 
                 if (searchView != null) {
                     // If searchView not null -> set query hint and open/query/close listeners
                     searchView.setQueryHint(getString(R.string.action_search));
-                    searchView.setOnSearchClickListener(new View.OnClickListener() {
+                    searchView.setOnQueryTextListener(this);
+
+                    MenuItemCompat.setOnActionExpandListener(searchMenu,
+                            new MenuItemCompat.OnActionExpandListener() {
+
                         @Override
-                        public void onClick(View v) {
+                        public boolean onMenuItemActionExpand(MenuItem item) {
                             searchActive = true;
                             newNoteButtonVisibility(false);
                             // Disable long-click on listView to prevent deletion
@@ -214,15 +214,14 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                                 realIndexesOfSearchResults.add(i);
 
                             adapter.notifyDataSetChanged();
-                        }
-                    });
 
-                    searchView.setOnQueryTextListener(this);
-                    searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+                            return true;
+                        }
+
                         @Override
-                        public boolean onClose() {
+                        public boolean onMenuItemActionCollapse(MenuItem item) {
                             searchEnded();
-                            return false;
+                            return true;
                         }
                     });
                 }
@@ -717,7 +716,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
      * and show newNote button
      */
     protected void searchEnded() {
-        searchView.onActionViewCollapsed();
         searchActive = false;
         adapter = new NoteAdapter(getApplicationContext(), notes);
         listView.setAdapter(adapter);
@@ -737,7 +735,8 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         if (resultCode == RESULT_OK) {
             // If search was active -> call 'searchEnded' method
             if (searchActive)
-                searchEnded();
+                if (searchMenu != null)
+                    searchMenu.collapseActionView();
 
             // Get extras
             Bundle mBundle = null;
