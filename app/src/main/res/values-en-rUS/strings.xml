@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Swiftnotes</string>
+    <string name="title_edit_notes_activity">Note</string>
+    <!-- -->
+    <string name="no_notes_text">Press \'+\' to add new note</string>
+    <string name="note_title">Title</string>
+    <string name="note_body">Note</string>
+    <!-- -->
+    <string name="yes_button">Yes</string>
+    <string name="no_button">No</string>
+    <!-- -->
+    <string-array name="colourNames">
+        <item>Blue</item>
+        <item>Teal</item>
+        <item>Green</item>
+        <item>Yellow</item>
+        <item>Orange</item>
+        <item>Red</item>
+        <item>Pink</item>
+        <item>Purple</item>
+        <item>White</item>
+    </string-array>
+    <!-- -->
+    <string-array name="fontSizeNames">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+    <!-- -->
+    <string name="action_search">Search</string>
+    <string name="action_rate_app">Rate app</string>
+    <string name="action_backup">Backup notes</string>
+    <string name="action_restore">Restore notes</string>
+    <string name="action_note_colour">Note colour</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_delete_selected_number">Selected</string>
+    <string name="action_font_size">Note font size</string>
+    <string name="action_hide_body">Hide note body in list</string>
+    <string name="action_show_body">Show note body in list</string>
+    <!-- -->
+    <string name="dialog_delete">Selected notes will be deleted!</string>
+    <string name="dialog_note_colour">Change note colour</string>
+    <string name="dialog_save_changes">Save changes?</string>
+    <string name="dialog_font_size">Change note font size</string>
+    <string name="dialog_rate_title">Rate app</string>
+    <string name="dialog_rate_message">Open app in Play Store?
+        (Thank you for rating! We really appreciate it!)</string>
+    <string name="dialog_check_backup_if_sure">Are you sure you want to backup current notes?</string>
+    <string name="dialog_backup_created_title">Backup successful</string>
+    <string name="dialog_backup_created">Backup created in</string>
+    <string name="dialog_check_restore_if_sure">Are you sure you want to restore backup notes?
+        (Cannot be undone)</string>
+    <string name="dialog_restore_failed_title">No backup found</string>
+    <string name="dialog_restore_failed">To restore notes, the backup file
+        has to be in \'External/Swiftnotes/swiftnotes_backup.json\'</string>
+    <!-- -->
+    <string name="new_note_content_description">New note</string>
+    <string name="favourite_content_description">Favourite</string>
+    <!-- -->
+    <string name="toast_deleted">Delete successful</string>
+    <string name="toast_new_note">Note created</string>
+    <string name="toast_note_saved">Note saved</string>
+    <string name="toast_empty_note_discarded">Empty note discarded</string>
+    <string name="toast_edittext_cannot_be_empty">Title cannot be empty</string>
+    <string name="toast_note_body_hidden">Note body will now be hidden in notes list</string>
+    <string name="toast_note_body_showing">Note body will now be shown in notes list</string>
+    <string name="toast_backup_failed">Backup unsuccessful</string>
+    <string name="toast_backup_no_notes">No notes to backup</string>
+    <string name="toast_restore_successful">Notes restored</string>
+    <string name="toast_restore_unsuccessful">Restore unsuccessful</string>
+
+</resources>
