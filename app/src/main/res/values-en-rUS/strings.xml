@@ -33,7 +33,7 @@
     <string name="action_rate_app">Rate app</string>
     <string name="action_backup">Backup notes</string>
     <string name="action_restore">Restore notes</string>
-    <string name="action_note_colour">Note colour</string>
+    <string name="action_note_colour">Note color</string>
     <string name="action_delete">Delete</string>
     <string name="action_delete_selected_number">Selected</string>
     <string name="action_font_size">Note font size</string>
@@ -41,7 +41,7 @@
     <string name="action_show_body">Show note body in list</string>
     <!-- -->
     <string name="dialog_delete">Selected notes will be deleted!</string>
-    <string name="dialog_note_colour">Change note colour</string>
+    <string name="dialog_note_colour">Change note color</string>
     <string name="dialog_save_changes">Save changes?</string>
     <string name="dialog_font_size">Change note font size</string>
     <string name="dialog_rate_title">Rate app</string>
@@ -57,7 +57,7 @@
         has to be in \'External/Swiftnotes/swiftnotes_backup.json\'</string>
     <!-- -->
     <string name="new_note_content_description">New note</string>
-    <string name="favourite_content_description">Favourite</string>
+    <string name="favourite_content_description">Favorite</string>
     <!-- -->
     <string name="toast_deleted">Delete successful</string>
     <string name="toast_new_note">Note created</string>
