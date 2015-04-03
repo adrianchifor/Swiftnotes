@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -39,6 +41,8 @@ public class ColorPickerDialog extends DialogFragment implements OnColorSelected
     protected int mSelectedColor;
     protected int mColumns;
     protected int mSize;
+
+    protected boolean isShowing = false;
 
     private ColorPickerPalette mPalette;
     private ProgressBar mProgress;
@@ -200,5 +204,26 @@ public class ColorPickerDialog extends DialogFragment implements OnColorSelected
 
     public int getSelectedColor() {
         return mSelectedColor;
+    }
+
+
+    @Override
+    public void show(@NonNull FragmentManager manager, String tag) {
+        if (isShowing)
+            return;
+
+        super.show(manager, tag);
+        isShowing = true;
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        isShowing = false;
+        super.onDismiss(dialog);
+    }
+
+
+    public boolean isDialogShowing() {
+        return isShowing;
     }
 }

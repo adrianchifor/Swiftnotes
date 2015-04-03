@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Swiftnotes</string>
+    <string name="title_edit_notes_activity">Anteckningar</string>
+    <!-- -->
+    <string name="no_notes_text">Tryck på  \'+\' för att lägga till en ny anteckning</string>
+    <string name="note_title">Titel</string>
+    <string name="note_body">Anteckning</string>
+    <!-- -->
+    <string name="yes_button">Ja</string>
+    <string name="no_button">Nej</string>
+    <!-- -->
+    <string-array name="colourNames">
+        <item>Blå</item>
+        <item>Blågrön</item>
+        <item>Grön</item>
+        <item>Gul</item>
+        <item>Orange</item>
+        <item>Röd</item>
+        <item>Rosa</item>
+        <item>Lila</item>
+        <item>Vit</item>
+    </string-array>
+    <!-- -->
+    <string-array name="fontSizeNames">
+        <item>Liten</item>
+        <item>Mellan</item>
+        <item>Stor</item>
+    </string-array>
+    <!-- -->
+    <string name="action_search">Sök</string>
+    <string name="action_rate_app">Betygsätt app</string>
+    <string name="action_backup">Säkerhetskopiera anteckningar</string>
+    <string name="action_restore">Återställ anteckningar</string>
+    <string name="action_note_colour">Anteckningens färg</string>
+    <string name="action_delete">Ta bort</string>
+    <string name="action_delete_selected_number">Markerad</string>
+    <string name="action_font_size">Anteckningens textstorlek</string>
+    <string name="action_hide_body">Göm anteckningens innehåll i listan</string>
+    <string name="action_show_body">Visa anteckningens innehåll i listan</string>
+    <!-- -->
+    <string name="dialog_delete">Markerade anteckningar kommer att tas bort!</string>
+    <string name="dialog_note_colour">Ändra anteckningens färg</string>
+    <string name="dialog_save_changes">Spara ändringar?</string>
+    <string name="dialog_font_size">Ändra anteckningens textstorlek</string>
+    <string name="dialog_rate_title">Betygsätt app</string>
+    <string name="dialog_rate_message">Öppna appen i Play Store?
+        (Tack för ditt betyg! Vi uppskattar det verkligen!)</string>
+    <string name="dialog_check_backup_if_sure">Är du säker på att du vill ta en säkerhetskopia på aktuella anteckningar?</string>
+    <string name="dialog_backup_created_title">Säkerhetskopieringen lyckades</string>
+    <string name="dialog_backup_created">Säkerhetskopia skapades i</string>
+    <string name="dialog_check_restore_if_sure">Är du säker på att du vill återställa säkerhetskopierade anteckningar?
+        (Kan inte ångras)</string>
+    <string name="dialog_restore_failed_title">Ingen säkerhetskopia hittades</string>
+    <string name="dialog_restore_failed">För att kunna återställa anteckningar, måste säkerhetskopian
+        finnas i \'External/Swiftnotes/swiftnotes_backup.json\'</string>
+    <!-- -->
+    <string name="new_note_content_description">Ny anteckning</string>
+    <string name="favourite_content_description">Favorit</string>
+    <!-- -->
+    <string name="toast_deleted">Borttagningen lyckades</string>
+    <string name="toast_new_note">Anteckning skapad</string>
+    <string name="toast_note_saved">Anteckning sparad</string>
+    <string name="toast_empty_note_discarded">Tom anteckning förkastad</string>
+    <string name="toast_edittext_cannot_be_empty">Titeln kan inte vara tom</string>
+    <string name="toast_note_body_hidden">Anteckningarnas innehåll kommer nu att vara dold i anteckningslistan</string>
+    <string name="toast_note_body_showing">Anteckningarnas innehåll kommer nu att visas i anteckningslistan</string>
+    <string name="toast_backup_failed">Säkerhetskopieringen misslyckades</string>
+    <string name="toast_backup_no_notes">Inga anteckningar att säkerhetskopiera</string>
+    <string name="toast_restore_successful">Anteckningar återställda</string>
+    <string name="toast_restore_unsuccessful">Återställningen misslyckades</string>
+
+</resources>

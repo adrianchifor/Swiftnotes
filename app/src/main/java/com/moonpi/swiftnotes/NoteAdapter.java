@@ -66,6 +66,7 @@ public class NoteAdapter extends BaseAdapter implements ListAdapter {
         return 0;
     }
 
+
     // View inflater
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {

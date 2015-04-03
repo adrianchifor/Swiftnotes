@@ -176,9 +176,7 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
     protected void initDialogs(Context context) {
         // Colour picker dialog
         colorPickerDialog = ColorPickerDialog.newInstance(R.string.dialog_note_colour,
-                colourArrResId,
-                Color.parseColor(colour),
-                3,
+                colourArrResId, Color.parseColor(colour), 3,
                 isTablet(this) ? ColorPickerDialog.SIZE_LARGE : ColorPickerDialog.SIZE_SMALL);
 
         // Colour picker listener in colour picker dialog
@@ -205,10 +203,8 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
                 .setItems(fontSizeNameArr, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Font size is updated with new pick
+                        // Font size updated with new pick
                         fontSize = fontSizeArr[which];
-
-                        // Font size is changed
                         bodyEdit.setTextSize(TypedValue.COMPLEX_UNIT_SP, fontSize);
                     }
                 })
@@ -417,8 +413,9 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
 
-        if (!hasFocus && !titleEdit.isFocused() && !bodyEdit.isFocused())
-            imm.hideSoftInputFromWindow(titleEdit.getWindowToken(), 0);
+        if (!hasFocus)
+            if (imm != null && titleEdit != null)
+                imm.hideSoftInputFromWindow(titleEdit.getWindowToken(), 0);
     }
 
 
@@ -429,14 +426,14 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
      */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        if (colorPickerDialog.isVisible())
+        if (colorPickerDialog != null && colorPickerDialog.isDialogShowing())
             colorPickerDialog.dismiss();
 
-        if (fontDialog.isShowing())
+        if (fontDialog != null && fontDialog.isShowing())
             fontDialog.dismiss();
 
-        if (saveChangesDialog.isShowing())
-            fontDialog.dismiss();
+        if (saveChangesDialog != null && saveChangesDialog.isShowing())
+            saveChangesDialog.dismiss();
 
         super.onConfigurationChanged(newConfig);
     }

@@ -343,9 +343,8 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                         }
 
                         // If backup file doesn't exist -> show restore failed dialog
-                        else {
+                        else
                             showRestoreFailedDialog();
-                        }
                     }
                 })
                 .setNegativeButton(R.string.no_button, new DialogInterface.OnClickListener() {
@@ -734,9 +733,8 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             // If search was active -> call 'searchEnded' method
-            if (searchActive)
-                if (searchMenu != null)
-                    searchMenu.collapseActionView();
+            if (searchActive && searchMenu != null)
+                searchMenu.collapseActionView();
 
             // Get extras
             Bundle mBundle = null;
@@ -942,22 +940,36 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
 
     /**
+     * If back button pressed while search is active -> collapse view and end search mode
+     */
+    @Override
+    public void onBackPressed() {
+        if (searchActive && searchMenu != null) {
+            searchMenu.collapseActionView();
+            return;
+        }
+
+        super.onBackPressed();
+    }
+
+
+    /**
      * Orientation changed callback method
      * If orientation changed -> If any AlertDialog is showing, dismiss it to prevent WindowLeaks
      * @param newConfig New Configuration passed by system
      */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        if (backupCheckDialog.isShowing())
+        if (backupCheckDialog != null && backupCheckDialog.isShowing())
             backupCheckDialog.dismiss();
 
-        if (backupOKDialog.isShowing())
+        if (backupOKDialog != null && backupOKDialog.isShowing())
             backupOKDialog.dismiss();
 
-        if (restoreCheckDialog.isShowing())
+        if (restoreCheckDialog != null && restoreCheckDialog.isShowing())
             restoreCheckDialog.dismiss();
 
-        if (restoreFailedDialog.isShowing())
+        if (restoreFailedDialog != null && restoreFailedDialog.isShowing())
             restoreFailedDialog.dismiss();
 
         super.onConfigurationChanged(newConfig);
