@@ -21,7 +21,7 @@ Steps on how to build Swiftnotes:
 
 ### License
 
-Copyright &copy; 2014 MoonPi - Adrian Chifor
+Copyright &copy; 2015 MoonPi - Adrian Chifor
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
