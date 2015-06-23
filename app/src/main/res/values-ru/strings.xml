@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Swiftnotes</string>
+    <string name="action_backup">Бэкапить заметки</string>
+    <string name="action_delete">Удалить</string>
+    <string name="action_delete_selected_number">Выбранные</string>
+    <string name="action_font_size">Размер шрифта заметки</string>
+    <string name="action_note_colour">Цвет заметки</string>
+    <string name="action_rate_app">Оценить приложение</string>
+    <string name="action_restore">Восстановить заметки</string>
+    <string name="action_search">Пойск</string>
+    <string name="action_hide_body">Спрятать тело заметки</string>
+    <string name="action_show_body">Показывать тело заметки</string>
+    <string name="dialog_backup_created">Бэкап создан в</string>
+    <string name="dialog_backup_created_title">Бэкап создан успешно</string>
+    <string name="dialog_check_backup_if_sure">Вы уверены что хотите вэкапить актуальные заметки?</string>
+    <string name="dialog_check_restore_if_sure">Вы уверены что хотите восстановить заметки?    (Неотменяемый процесс)</string>
+    <string name="dialog_delete">Выбранные заметки будут удалены!</string>
+    <string name="dialog_font_size">Сменять размер шрифта заметки</string>
+    <string name="dialog_note_colour">Сменять цвет заметки</string>
+    <string name="dialog_rate_message">Открыть приложение в Google Play?   (Спасибо за оценивание! Мы вам очень благодарны!)</string>
+    <string name="dialog_rate_title">Оценить приложение</string>
+    <string name="dialog_restore_failed">Для успешной восстановки, фаил должен быть в папке \'External/Swiftnotes/swiftnotes_backup.json\'</string>
+    <string name="dialog_restore_failed_title">Восстановки не найдены</string>
+    <string name="dialog_save_changes">Сохранить изменение?</string>
+    <string name="favourite_content_description">Фаворит</string>
+    <string name="new_note_content_description">Новая заметка</string>
+    <string name="no_button">Нет</string>
+    <string name="no_notes_text">Чтобы создать новую заметку, нажмите на \'+\'</string>
+    <string name="note_body">Заметка</string>
+    <string name="note_title">Звание</string>
+    <string name="title_edit_notes_activity">Заметка</string>
+    <string name="toast_backup_failed">Бекап не успешен</string>
+    <string name="toast_backup_no_notes">Нет заметок для бекапа</string>
+    <string name="toast_deleted">Удаление завершено</string>
+    <string name="toast_edittext_cannot_be_empty">Звание не может быть пусто</string>
+    <string name="toast_empty_note_discarded">Пустая заметка сброшина</string>
+    <string name="toast_new_note">Заметка создана</string>
+    <string name="toast_note_body_hidden">Тело заметки спрятано в листе заметков</string>
+    <string name="toast_note_body_showing">Тело заметки показано в листе заметков</string>
+    <string name="toast_note_saved">Заметка сохранена</string>
+    <string name="toast_restore_successful">Заметки восстановлены</string>
+    <string name="toast_restore_unsuccessful">Восстановление не успешна</string>
+    <string name="yes_button">Да</string>
+</resources>
