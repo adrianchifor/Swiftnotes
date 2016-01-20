@@ -53,7 +53,7 @@
     <string name="dialog_check_restore_if_sure">Bist du dir sicher, dass du die Notizen wiederherstellen willst?
         (Kann nicht rückgängig gemacht werden)</string>
     <string name="dialog_restore_failed_title">Keine Sicherung gefunden</string>
-    <string name="dialog_restore_failed">Um die Notizen wiederherzustellen, muss die Backup Datei
+    <string name="dialog_restore_failed">Um die Notizen wiederherzustellen, muss die Sicherungsdatei
         in \'External/Swiftnotes/swiftnotes_backup.json\' sein</string>
     <!-- -->
     <string name="new_note_content_description">Neue Notiz</string>
