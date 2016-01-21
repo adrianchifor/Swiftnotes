@@ -31,6 +31,6 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 ### Donate
 
-To support development, you can donate with PayPal or Card using this [link](http://goo.gl/TQRlTa). For Bitcoin donations, our address is: 1NZGAU1rEs1zBpwdjmnBjiyRsJHfycWhSF. 
+To support development, you can donate with PayPal or Card using this [link](http://goo.gl/TQRlTa). For Bitcoin donations, our address is: 1PEGbaQAbCxaMs3TYu7e2NoVwAC7158Fvv. 
 
 Donations help us implement amazing new features and deliver updates at a faster rate. Any amount would be most appreciated. Thank you!
