@@ -11,7 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.ActionMode;
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import static com.moonpi.swiftnotes.DataUtils.*;
 
 
-public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener,
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,
         Toolbar.OnMenuItemClickListener, AbsListView.MultiChoiceModeListener,
         SearchView.OnQueryTextListener {
 
