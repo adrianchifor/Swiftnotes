@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Swiftnotes</string>
+    <string name="title_edit_notes_activity">Jegyzet</string>
+    <!-- -->
+    <string name="no_notes_text">A \'+\' gombbal adhatsz hozzá új jegyzetet</string>
+    <string name="note_title">Cím</string>
+    <string name="note_body">Jegyzet</string>
+    <!-- -->
+    <string name="yes_button">Igen</string>
+    <string name="no_button">Nem</string>
+    <!-- -->
+    <string-array name="colourNames">
+        <item>Kék</item>
+        <item>Kékeszöld</item>
+        <item>Zöld</item>
+        <item>Sárga</item>
+        <item>Narancs</item>
+        <item>P</item>
+        <item>Rózsaszín</item>
+        <item>Lila</item>
+        <item>F</item>
+    </string-array>
+    <!-- -->
+    <string-array name="fontSizeNames">
+        <item>Kicsi</item>
+        <item>K</item>
+        <item>N</item>
+    </string-array>
+    <!-- -->
+    <string name="action_search">Keresés</string>
+    <string name="action_rate_app">Alkalmazás értékelése</string>
+    <string name="action_backup">Jegyzetek kimentése</string>
+    <string name="action_restore">Jegyzetek visszatöltése</string>
+    <string name="action_note_colour">Jegyzet színe</string>
+    <string name="action_delete">Törlés</string>
+    <string name="action_delete_selected_number">Kiválasztva</string>
+    <string name="action_font_size">Jegyzet betűmérete</string>
+    <string name="action_hide_body">Jegyzet szövegének elrejtése a listában</string>
+    <string name="action_show_body">Jegyzet szövegének mutatása a listában</string>
+    <!-- -->
+    <string name="dialog_delete">A kijelölt jegyzetek törlődnek!</string>
+    <string name="dialog_note_colour">Jegyzetszín megváltoztatása</string>
+    <string name="dialog_save_changes">Mented a változásokat?</string>
+    <string name="dialog_font_size">Jegyzet betűméretének változtatása</string>
+    <string name="dialog_rate_title">Alkalmazás értékelése</string>
+    <string name="dialog_rate_message">Megnyitod az alkalmazást a Play Áruházban? (Köszönjük az értékelés! Sokat jelent!)</string>
+    <string name="dialog_check_backup_if_sure">Biztos szeretnél biztonsági mentést készíteni a jegyzetekről?</string>
+    <string name="dialog_backup_created_title">Biztonsági mentés sikeres</string>
+    <string name="dialog_backup_created">Biztonsági mentés létrehozva:</string>
+    <string name="dialog_check_restore_if_sure">Biztos helyre szeretnéd állítani a jegyzeteket biztonsági mentésből? (Nem lehet visszavonni)</string>
+    <string name="dialog_restore_failed_title">Nem található biztonsági mentés</string>
+    <string name="dialog_restore_failed">A jegyzetek visszaállításához a biztonsági mentésnek itt kell lennie: \'External/Swiftnotes/swiftnotes_backup.json\'</string>
+    <!-- -->
+    <string name="new_note_content_description">Új jegyzet</string>
+    <string name="favourite_content_description">Kedvenc</string>
+    <!-- -->
+    <string name="toast_deleted">Sikeres törlés</string>
+    <string name="toast_new_note">Jegyzet létrehozva</string>
+    <string name="toast_note_saved">Jegyzet mentve</string>
+    <string name="toast_empty_note_discarded">Az üres jegyzet elvetve</string>
+    <string name="toast_edittext_cannot_be_empty">A cím nem lehet üres</string>
+    <string name="toast_note_body_hidden">A jegyzet szövege nem fog megjelenni a jegyzetlistában</string>
+    <string name="toast_note_body_showing">A jegyzet szövege meg fog jelenni a jegyzetlistában</string>
+    <string name="toast_backup_failed">Nem sikerült a biztonsági mentés</string>
+    <string name="toast_backup_no_notes">Nincs lementhető jegyzet</string>
+    <string name="toast_restore_successful">Jegyzetek visszaállítva</string>
+    <string name="toast_restore_unsuccessful">A helyreállítás sikertelen</string>
+
+</resources>
