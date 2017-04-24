@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Swiftnotes</string>
+    <string name="title_edit_notes_activity">メモ</string>
+    <!-- -->
+    <string name="no_notes_text">\'+\' を押して新しいメモを追加します</string>
+    <string name="note_title">タイトル</string>
+    <string name="note_body">メモ</string>
+    <!-- -->
+    <string name="yes_button">はい</string>
+    <string name="no_button">いいえ</string>
+    <!-- -->
+    <string-array name="colourNames">
+        <item>青</item>
+        <item>青緑</item>
+        <item>緑</item>
+        <item>黄</item>
+        <item>オレンジ</item>
+        <item>赤</item>
+        <item>ピンク</item>
+        <item>紫</item>
+        <item>白</item>
+    </string-array>
+    <!-- -->
+    <string-array name="fontSizeNames">
+        <item>小</item>
+        <item>中</item>
+        <item>大</item>
+    </string-array>
+    <!-- -->
+    <string name="action_search">検索</string>
+    <string name="action_rate_app">アプリを評価</string>
+    <string name="action_backup">メモをバックアップ</string>
+    <string name="action_restore">メモを復元</string>
+    <string name="action_note_colour">メモの色</string>
+    <string name="action_delete">削除</string>
+    <string name="action_delete_selected_number">選択済</string>
+    <string name="action_font_size">メモのフォントサイズ</string>
+    <string name="action_hide_body">リストにメモの本文を非表示</string>
+    <string name="action_show_body">リストにメモの本文を表示</string>
+    <!-- -->
+    <string name="dialog_delete">選択したメモは削除されます!</string>
+    <string name="dialog_note_colour">メモの色を変更</string>
+    <string name="dialog_save_changes">変更を保存しますか?</string>
+    <string name="dialog_font_size">メモのフォントサイズを変更</string>
+    <string name="dialog_rate_title">アプリを評価</string>
+    <string name="dialog_rate_message">Play ストアでアプリを開きますか?
+        (評価していただきありがとうございます! 本当に感謝します!)</string>
+    <string name="dialog_check_backup_if_sure">現在のメモをバックアップしてもよろしいですか?</string>
+    <string name="dialog_backup_created_title">バックアップに成功しました</string>
+    <string name="dialog_backup_created">バックアップを作成しました</string>
+    <string name="dialog_check_restore_if_sure">バックアップしたメモを復元してもよろしいですか?
+        (元に戻すことはできません)</string>
+    <string name="dialog_restore_failed_title">バックアップが見つかりません</string>
+    <string name="dialog_restore_failed">メモを復元するには、バックアップファイルが
+        \'External/Swiftnotes/swiftnotes_backup.json\' に存在する必要があります</string>
+    <!-- -->
+    <string name="new_note_content_description">新しいメモ</string>
+    <string name="favourite_content_description">お気に入り</string>
+    <!-- -->
+    <string name="toast_deleted">削除に成功しました</string>
+    <string name="toast_new_note">メモを作成しました</string>
+    <string name="toast_note_saved">メモを保存しました</string>
+    <string name="toast_empty_note_discarded">空のメモを破棄しました</string>
+    <string name="toast_edittext_cannot_be_empty">タイトルは空にできません</string>
+    <string name="toast_note_body_hidden">メモのリストでメモの本文を非表示にします</string>
+    <string name="toast_note_body_showing">メモのリストでメモの本文を表示します</string>
+    <string name="toast_backup_failed">バックアップに失敗しました</string>
+    <string name="toast_backup_no_notes">バックアップするメモはありません</string>
+    <string name="toast_restore_successful">メモを復元しました</string>
+    <string name="toast_restore_unsuccessful">復元に失敗しました</string>
+
+</resources>
