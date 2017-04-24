@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Swiftnotes</string>
+    <string name="title_edit_notes_activity">Notas</string>
+    <!-- -->
+    <string name="no_notes_text">Pressione \'+\' para adicionar uma nova anotação</string>
+    <string name="note_title">Título</string>
+    <string name="note_body">Anotação</string>
+    <!-- -->
+    <string name="yes_button">Sim</string>
+    <string name="no_button">Não</string>
+    <!-- -->
+    <string-array name="colourNames">
+        <item>Azul</item>
+        <item>Teal</item>
+        <item>Verde</item>
+        <item>Amarelo</item>
+        <item>Laranja</item>
+        <item>Vermelho</item>
+        <item>Rosa</item>
+        <item>Roxo</item>
+        <item>Branco</item>
+    </string-array>
+    <!-- -->
+    <string-array name="fontSizeNames">
+        <item>Pequeno</item>
+        <item>Médio</item>
+        <item>Grande</item>
+    </string-array>
+    <!-- -->
+    <string name="action_search">Pesquisa</string>
+    <string name="action_rate_app">Avalie o app</string>
+    <string name="action_backup">Backup das anotações</string>
+    <string name="action_restore">Restaurar anotações</string>
+    <string name="action_note_colour">Cores da anotação</string>
+    <string name="action_delete">Excluir</string>
+    <string name="action_delete_selected_number">Selecionado</string>
+    <string name="action_font_size">Tamanho da fonte</string>
+    <string name="action_hide_body">Ocutar anotação do corpo da lista</string>
+    <string name="action_show_body">Mostrar anotação no corpo da lista</string>
+    <!-- -->
+    <string name="dialog_delete">Anotações selecionadas serão apagadas!</string>
+    <string name="dialog_note_colour">Alterar cor da anotação</string>
+    <string name="dialog_save_changes">Você deseja salvar alterações?</string>
+    <string name="dialog_font_size">Alterar o tamanho da fonte da anotação</string>
+    <string name="dialog_rate_title">Avaliar app</string>
+    <string name="dialog_rate_message">Abrir app na Play Store?
+        (Obrigado pela avaliação! Nós realmente apreciamos isso!)</string>
+    <string name="dialog_check_backup_if_sure">Você deseja fazer o backup das anotações atuais?</string>
+    <string name="dialog_backup_created_title">Backup realizado com sucesso</string>
+    <string name="dialog_backup_created">Backup criado em</string>
+    <string name="dialog_check_restore_if_sure">Você deseja restaurar o backup das anotações?
+        (O processo não pode ser desfeito)</string>
+    <string name="dialog_restore_failed_title">Nenhum backup encontrado</string>
+    <string name="dialog_restore_failed">Para restaurar as anotações, o arquivo de backup tem que se econtrar no diretório \'External/Swiftnotes/swiftnotes_backup.json\'</string>
+    <!-- -->
+    <string name="new_note_content_description">Nova anotação</string>
+    <string name="favourite_content_description">Favorito</string>
+    <!-- -->
+    <string name="toast_deleted">Deletado com sucesso</string>
+    <string name="toast_new_note">Anotação criada</string>
+    <string name="toast_note_saved">Anotação salva</string>
+    <string name="toast_empty_note_discarded">Anotação vazia descartada</string>
+    <string name="toast_edittext_cannot_be_empty">O título não pode estar vazio</string>
+    <string name="toast_note_body_hidden">O corpo da anotação será escondido na lista de anotações</string>
+    <string name="toast_note_body_showing">O corpo da anotação será mostrado na lista de anotações</string>
+    <string name="toast_backup_failed">Backup sem êxito</string>
+    <string name="toast_backup_no_notes">Não há anotações para fazer backup</string>
+    <string name="toast_restore_successful">Anotações restauradas</string>
+    <string name="toast_restore_unsuccessful">Restauração sem êxito</string>
+
+</resources>
