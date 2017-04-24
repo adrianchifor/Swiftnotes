@@ -2,9 +2,9 @@
 <resources>
 
     <string name="app_name">Swiftnotes</string>
-    <string name="title_edit_notes_activity">Notizen</string>
+    <string name="title_edit_notes_activity">Notiz</string>
     <!-- -->
-    <string name="no_notes_text">Drücke \'+\' um eine neue Notiz hinzuzufügen</string>
+    <string name="no_notes_text">Drücke \'+\', um eine neue Notiz hinzuzufügen</string>
     <string name="note_title">Titel</string>
     <string name="note_body">Notiz</string>
     <!-- -->
@@ -37,23 +37,23 @@
     <string name="action_delete">Löschen</string>
     <string name="action_delete_selected_number">Ausgewählt</string>
     <string name="action_font_size">Schriftgröße der Notiz</string>
-    <string name="action_hide_body">Ausblenden Hinweis Stelle in der Liste</string>
-    <string name="action_show_body">Anzeigen Hinweis Stelle in der Liste</string>
+    <string name="action_hide_body">Inhalt der Notiz ausblenden</string>
+    <string name="action_show_body">Inhalt der Notiz anzeigen</string>
     <!-- -->
-    <string name="dialog_delete">Ausgewählte Erläuterungen werden gelöscht!</string>
+    <string name="dialog_delete">Ausgewählte Notizen werden gelöscht!</string>
     <string name="dialog_note_colour">Farbe der Notiz ändern</string>
     <string name="dialog_save_changes">Änderungen speichern?</string>
     <string name="dialog_font_size">Schriftgröße der Notiz ändern</string>
     <string name="dialog_rate_title">App bewerten</string>
     <string name="dialog_rate_message">App im Play Store öffnen?
         (Danke für deine Bewertung! Wir wissen das sehr zu schätzen!)</string>
-    <string name="dialog_check_backup_if_sure">Bist du dir sicher, dass du ein Backup der Notizen machen willst?</string>
-    <string name="dialog_backup_created_title">Backup erfolgreich</string>
-    <string name="dialog_backup_created">Backup erstellt in</string>
+    <string name="dialog_check_backup_if_sure">Bist du dir sicher, dass du die aktuellen Notizen sichern willst?</string>
+    <string name="dialog_backup_created_title">Sicherung erfolgreich</string>
+    <string name="dialog_backup_created">Sicherung erstellt in</string>
     <string name="dialog_check_restore_if_sure">Bist du dir sicher, dass du die Notizen wiederherstellen willst?
         (Kann nicht rückgängig gemacht werden)</string>
-    <string name="dialog_restore_failed_title">Kein Backup gefunden</string>
-    <string name="dialog_restore_failed">Um die Notizen wiederherzustellen, muss die Backup Datei
+    <string name="dialog_restore_failed_title">Keine Sicherung gefunden</string>
+    <string name="dialog_restore_failed">Um die Notizen wiederherzustellen, muss die Sicherungsdatei
         in \'External/Swiftnotes/swiftnotes_backup.json\' sein</string>
     <!-- -->
     <string name="new_note_content_description">Neue Notiz</string>
@@ -64,11 +64,11 @@
     <string name="toast_note_saved">Notiz gespeichert</string>
     <string name="toast_empty_note_discarded">Leere Notiz verworfen</string>
     <string name="toast_edittext_cannot_be_empty">Der Titel kann nicht leer sein</string>
-    <string name="toast_note_body_hidden">Hinweis Körper wird nun Notizen Liste ausgeblendet werden</string>
-    <string name="toast_note_body_showing">Textkörper der Notiz wird jetzt angezeigt in Notizen</string>
-    <string name="toast_backup_failed">Backup nicht erfolgreich</string>
-    <string name="toast_backup_no_notes">Keine Notizen für das Backup</string>
+    <string name="toast_note_body_showing">Notizeninhalt wird nun in der Übersicht angezeigt</string>
+    <string name="toast_backup_failed">Sicherung nicht erfolgreich</string>
     <string name="toast_restore_successful">Notizen wiederhergestellt</string>
     <string name="toast_restore_unsuccessful">Wiederherstellung nicht erfolgreich</string>
+    <string name="toast_note_body_hidden">Notizeninhalt wird nun in der Übersicht versteckt</string>
+    <string name="toast_backup_no_notes">Keine zu sichernden Notizen </string>
 
 </resources>
