@@ -25,7 +25,7 @@ import static com.moonpi.swiftnotes.MainActivity.*;
 /**
  * Adapter class for custom notes ListView
  */
-public class NoteAdapter extends BaseAdapter implements ListAdapter {
+class NoteAdapter extends BaseAdapter implements ListAdapter {
     private Context context;
     private JSONArray adapterData;
     private LayoutInflater inflater;
@@ -35,7 +35,7 @@ public class NoteAdapter extends BaseAdapter implements ListAdapter {
      * @param context application context
      * @param adapterData JSONArray of notes
      */
-    public NoteAdapter(Context context, JSONArray adapterData) {
+    NoteAdapter(Context context, JSONArray adapterData) {
         this.context = context;
         this.adapterData = adapterData;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

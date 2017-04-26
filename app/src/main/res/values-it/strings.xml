@@ -37,15 +37,15 @@
     <string name="action_delete">Elimina</string>
     <string name="action_delete_selected_number">Selezionati</string>
     <string name="action_font_size">Dimensione carattere nota</string>
-    <string name="action_hide_body">Nascondi il corpo della nota nell'elenco</string>
-    <string name="action_show_body">Mostra il corpo della nota nell'elenco</string>
+    <string name="action_hide_body">Nascondi il corpo della nota nell\'elenco</string>
+    <string name="action_show_body">Mostra il corpo della nota nell\'elenco</string>
     <!-- -->
     <string name="dialog_delete">Le note selezionate saranno eliminate!</string>
     <string name="dialog_note_colour">Cambia colore nota</string>
     <string name="dialog_save_changes">Salva modifiche?</string>
     <string name="dialog_font_size">Cambia dimensione carattere nota</string>
     <string name="dialog_rate_title">Vota app</string>
-    <string name="dialog_rate_message">Apri la pagina dell'app nel Play Store?
+    <string name="dialog_rate_message">Apri la pagina dell\'app nel Play Store?
         (Grazie mille per votare! Ci fa molto piacere!)</string>
     <string name="dialog_check_backup_if_sure">Sei sicuro di voler fare il backup delle note?</string>
     <string name="dialog_backup_created_title">Backup eseguito con successo</string>
@@ -64,8 +64,8 @@
     <string name="toast_note_saved">Nota salvata</string>
     <string name="toast_empty_note_discarded">Nota vuota rimossa</string>
     <string name="toast_edittext_cannot_be_empty">Il titolo non può essere vuoto</string>
-    <string name="toast_note_body_hidden">Il corpo della nota sarà ora nascosto nell'elenco delle note</string>
-    <string name="toast_note_body_showing">Il corpo della nota sarà ora mostrato nell'elenco delle note</string>
+    <string name="toast_note_body_hidden">Il corpo della nota sarà ora nascosto nell\'elenco delle note</string>
+    <string name="toast_note_body_showing">Il corpo della nota sarà ora mostrato nell\'elenco delle note</string>
     <string name="toast_backup_failed">Backup fallito</string>
     <string name="toast_backup_no_notes">Nessuna nota da fare il backup</string>
     <string name="toast_restore_successful">Note ripristinate</string>

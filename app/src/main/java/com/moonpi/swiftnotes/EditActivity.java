@@ -9,7 +9,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -24,11 +24,18 @@ import android.widget.Toast;
 
 import com.moonpi.swiftnotes.ColorPicker.ColorPickerDialog;
 
-import static com.moonpi.swiftnotes.ColorPicker.ColorPickerSwatch.*;
-import static com.moonpi.swiftnotes.DataUtils.*;
+import static com.moonpi.swiftnotes.ColorPicker.ColorPickerSwatch.OnColorSelectedListener;
+import static com.moonpi.swiftnotes.ColorPicker.ColorPickerSwatch.OnTouchListener;
+import static com.moonpi.swiftnotes.DataUtils.NEW_NOTE_REQUEST;
+import static com.moonpi.swiftnotes.DataUtils.NOTE_BODY;
+import static com.moonpi.swiftnotes.DataUtils.NOTE_COLOUR;
+import static com.moonpi.swiftnotes.DataUtils.NOTE_FONT_SIZE;
+import static com.moonpi.swiftnotes.DataUtils.NOTE_HIDE_BODY;
+import static com.moonpi.swiftnotes.DataUtils.NOTE_REQUEST_CODE;
+import static com.moonpi.swiftnotes.DataUtils.NOTE_TITLE;
 
 
-public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuItemClickListener {
+public class EditActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener {
 
     // Layout components
     private EditText titleEdit, bodyEdit;
@@ -147,7 +154,7 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
         toolbar.setTitle("");
 
         // Set a 'Back' navigation icon in the Toolbar and handle the click
-        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_material);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -225,7 +232,7 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
                     public void onClick(DialogInterface dialog, int which) {
                         // If 'Yes' clicked -> check if title is empty
                         // If title not empty -> save and go back; Otherwise toast
-                        if (!isEmpty(titleEdit))
+                        if (!isEmpty(titleEdit) || !isEmpty(bodyEdit))
                             saveChanges();
 
                         else
@@ -360,7 +367,7 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
              *  If yes -> saveChanges
              *  If not -> hide keyboard if showing and finish
              */
-            if (!isEmpty(titleEdit)) {
+            if (!isEmpty(titleEdit) || !isEmpty(bodyEdit)) {
                 if (!(titleEdit.getText().toString().equals(bundle.getString(NOTE_TITLE))) ||
                     !(bodyEdit.getText().toString().equals(bundle.getString(NOTE_BODY))) ||
                     !(colour.equals(bundle.getString(NOTE_COLOUR))) ||
