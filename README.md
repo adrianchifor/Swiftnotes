@@ -9,7 +9,7 @@ It offers you a quick and easy way to stay organised, capture your thoughts, rem
 ### Build
 
 Steps on how to build Swiftnotes:
-- Make sure you have the latest version of Android Studio with Gradle v1.1.0 and the required Android SDK Tools installed (22.0.1 Build tools)
+- Make sure you have the latest version of Android Studio with Gradle v2.3.1 and the required Android SDK Tools installed (25.0.3 Build tools)
 - Clone this repository
 - Open Android Studio -> File -> Import Project
 - Select build.gradle in Swiftnotes
