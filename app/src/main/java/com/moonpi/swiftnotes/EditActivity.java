@@ -225,7 +225,7 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
                     public void onClick(DialogInterface dialog, int which) {
                         // If 'Yes' clicked -> check if title is empty
                         // If title not empty -> save and go back; Otherwise toast
-                        if (!isEmpty(titleEdit))
+                        if (!isEmpty(titleEdit) || !isEmpty(bodyEdit))
                             saveChanges();
 
                         else
@@ -360,7 +360,7 @@ public class EditActivity extends ActionBarActivity implements Toolbar.OnMenuIte
              *  If yes -> saveChanges
              *  If not -> hide keyboard if showing and finish
              */
-            if (!isEmpty(titleEdit)) {
+            if (!isEmpty(titleEdit) || !isEmpty(bodyEdit)) {
                 if (!(titleEdit.getText().toString().equals(bundle.getString(NOTE_TITLE))) ||
                     !(bodyEdit.getText().toString().equals(bundle.getString(NOTE_BODY))) ||
                     !(colour.equals(bundle.getString(NOTE_COLOUR))) ||
