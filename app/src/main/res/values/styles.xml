@@ -13,6 +13,7 @@
         <item name="android:textColorPrimary">@color/white</item>
         <item name="actionModeStyle">@style/ActionModeStyle</item>
         <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert</item>
     </style>
 
     <style name="ActionModeStyle" parent="Widget.AppCompat.ActionMode" >
