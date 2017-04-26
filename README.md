@@ -1,4 +1,4 @@
-# Swiftnotes [![Build Status](https://travis-ci.org/adrianchifor/Swiftnotes.svg)](https://travis-ci.org/adrianchifor/Swiftnotes)
+# Swiftnotes
 
 This project is no longer maintained.
 
