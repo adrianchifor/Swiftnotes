@@ -11,7 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.ActionMode;
@@ -32,10 +32,25 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 
-import static com.moonpi.swiftnotes.DataUtils.*;
+import static com.moonpi.swiftnotes.DataUtils.BACKUP_FILE_NAME;
+import static com.moonpi.swiftnotes.DataUtils.BACKUP_FOLDER_PATH;
+import static com.moonpi.swiftnotes.DataUtils.NEW_NOTE_REQUEST;
+import static com.moonpi.swiftnotes.DataUtils.NOTES_FILE_NAME;
+import static com.moonpi.swiftnotes.DataUtils.NOTE_BODY;
+import static com.moonpi.swiftnotes.DataUtils.NOTE_COLOUR;
+import static com.moonpi.swiftnotes.DataUtils.NOTE_FAVOURED;
+import static com.moonpi.swiftnotes.DataUtils.NOTE_FONT_SIZE;
+import static com.moonpi.swiftnotes.DataUtils.NOTE_HIDE_BODY;
+import static com.moonpi.swiftnotes.DataUtils.NOTE_REQUEST_CODE;
+import static com.moonpi.swiftnotes.DataUtils.NOTE_TITLE;
+import static com.moonpi.swiftnotes.DataUtils.deleteNotes;
+import static com.moonpi.swiftnotes.DataUtils.isExternalStorageReadable;
+import static com.moonpi.swiftnotes.DataUtils.isExternalStorageWritable;
+import static com.moonpi.swiftnotes.DataUtils.retrieveData;
+import static com.moonpi.swiftnotes.DataUtils.saveData;
 
 
-public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener,
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,
         Toolbar.OnMenuItemClickListener, AbsListView.MultiChoiceModeListener,
         SearchView.OnQueryTextListener {
 
