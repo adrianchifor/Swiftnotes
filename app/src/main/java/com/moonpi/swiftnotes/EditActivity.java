@@ -18,8 +18,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.moonpi.swiftnotes.ColorPicker.ColorPickerDialog;
@@ -59,6 +60,7 @@ public class EditActivity extends AppCompatActivity implements Toolbar.OnMenuIte
     private AlertDialog fontDialog, saveChangesDialog;
     private ColorPickerDialog colorPickerDialog;
 
+    private ImageButton saveNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +91,15 @@ public class EditActivity extends AppCompatActivity implements Toolbar.OnMenuIte
         titleEdit = (EditText)findViewById(R.id.titleEdit);
         bodyEdit = (EditText)findViewById(R.id.bodyEdit);
         relativeLayoutEdit = (RelativeLayout)findViewById(R.id.relativeLayoutEdit);
-        ScrollView scrollView = (ScrollView)findViewById(R.id.scrollView);
+        LinearLayout scrollView = (LinearLayout) findViewById(R.id.scrollView);
+        saveNote = (ImageButton) findViewById(R.id.saveNote);
+
+        saveNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         imm = (InputMethodManager) this.getSystemService(INPUT_METHOD_SERVICE);
 
