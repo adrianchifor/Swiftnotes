@@ -1,10 +1,10 @@
 # Swiftnotes
 
-This project is no longer maintained.
+**This project is no longer maintained.**
 
-[Swiftnotes](https://play.google.com/store/apps/details?id=com.moonpi.swiftnotes) is a note taking app that takes simplicity and speed to a whole new level. 
+Swiftnotes is a note taking app that takes simplicity and speed to a whole new level. 
 
-It offers you a quick and easy way to stay organised, capture your thoughts, reminders or anything that's on your mind, any time, anywhere. No extra unnecessary features, just notes. For screenshots and more information visit the [Google PlayStore.](https://play.google.com/store/apps/details?id=com.moonpi.swiftnotes)
+It offers you a quick and easy way to stay organised, capture your thoughts, reminders or anything that's on your mind, any time, anywhere. No extra unnecessary features, just notes.
 
 ### Build
 
